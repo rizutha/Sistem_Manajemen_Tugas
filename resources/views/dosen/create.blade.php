@@ -9,6 +9,7 @@
             </div>
         </div>
         <br>
+        {{-- z --}}
         <form action="{{ route('dosen.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <p><b>Kolom bertanda <span class="text-danger">*</span> tidak boleh
