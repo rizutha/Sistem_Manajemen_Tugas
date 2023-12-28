@@ -35,128 +35,130 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-chalkboard-teacher"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">S.P.T</div>
+                <div class="sidebar-brand-text mx-3">S.M.T</div>
             </a>
 
-            <!-- Divider -->
+            <!-- Top Nav Item Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            {{-- Nav Item Dashboard --}}
+            <li class="{{ strpos(request()->url(), 'beranda') !== false ? 'nav-item active' : 'nav-item' }}">
+                <a class="nav-link" href="/beranda">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            {{-- End Nav Item Dashboard --}}
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            {{-- Logic Nav Item --}}
+            @switch(auth()->user()->role)
+            {{-- Jika Role Admin --}}
+                @case('admin')
+                    {{-- Dosen Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Dosen
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'dosen') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/dosen">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Data Dosen</span></a>
+                    </li>
+                    {{-- End Dosen Nav Item --}}
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Dosen
-            </div>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Data Dosen</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Mahasiswa
-            </div>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-user-graduate"></i>
-                    <span>Data Mahasiswa</span></a>
-            </li>
+                    {{-- Mahasiswa Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Mahasiswa
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'mahasiswa') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/mahasiswa">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Data Mahasiswa</span></a>
+                    </li>
+                    {{-- End Mahasiswa Nav Item --}}
+                @break
+            {{-- Jika Role Dosen --}}
+                @case('dosen')
+                    {{-- Mahasiswa Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Mahasiswa
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'datamhs') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/datamhs">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Data Mahasiswa</span></a>
+                    </li>
+                    {{-- End Mahasiswa Nav Item --}}
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                    {{-- Tugas Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Tugas
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'tugas') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/tugas">
+                            <i class="fas fa-fw fa-tasks"></i>
+                            <span>Data Tugas</span></a>
+                    </li>
+                    {{-- End Tugas Nav Item --}}
+                @break
+            {{-- Jika Role Mahasiswa --}}
+                @case('mahasiswa')
+                    {{-- Tugas Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Tugas
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'tugasmhs') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/tugasmhs">
+                            <i class="fas fa-fw fa-tasks"></i>
+                            <span>Data Tugas</span></a>
+                    </li>
+                    {{-- End Tugas Nav Item --}}
+                @break
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Tugas
-            </div>
+                @default
+            @endswitch
+            {{-- End Logic Nav Item --}}
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-tasks"></i>
-                    <span>Data Tugas</span></a>
-            </li>
-
-            <!-- Divider -->
+            <!-- Bottom Nav Item Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="d-none d-md-inline text-center">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light topbar static-top mb-4 bg-white shadow">
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <!-- Pill Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter"></span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in shadow"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    Pemberitahuan
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to
-                                            download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
+                                {{--                                 
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -169,7 +171,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item small text-center text-gray-500" href="#">Show All
-                                    Alerts</a>
+                                    Alerts</a> --}}
                             </div>
                         </li>
 
@@ -179,24 +181,34 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-lg-inline small mr-2 text-gray-600">Douglas McGee</span>
+                                <span
+                                    class="d-none d-lg-inline small mr-2 text-gray-600">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('templates/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right animated--grow-in shadow"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                @switch(auth()->user()->role)
+                                    @case('dosen')
+                                        <a class="dropdown-item" href="/profildsn">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Profile
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                    @break
+
+                                    @case('mahasiswa')
+                                        <a class="dropdown-item" href="/profilmhs">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Profile
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                    @break
+
+                                    @default
+                                @endswitch
+                                <a class="dropdown-item" onclick="confirmLogout()">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -211,7 +223,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @yield('content')
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -222,7 +233,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright my-auto text-center">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; KELOMPOK 1 2024</span>
                     </div>
                 </div>
             </footer>
@@ -239,25 +250,9 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('templates/vendor/jquery/jquery.min.js') }}"></script>
@@ -275,6 +270,25 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('templates/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('templates/js/demo/chart-pie-demo.js') }}"></script>
+
+    {{-- KUMPULAN ALERT --}}
+    <script>
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Logout',
+                text: 'Apakah anda ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Y, logout',
+                cancelButtonText: 'Ah nggak jadi ah'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi logout, arahkan ke tautan logout
+                    window.location.href = '/logout';
+                }
+            });
+        }
+    </script>
 
 </body>
 

@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -13,23 +14,21 @@ class AuthController extends Controller
      * Handle an authentication attempt.
      */
     public function auth(Request $request)
-    {
-        // dd($request->all());
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('/beranda');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/beranda');
     }
+
+    throw ValidationException::withMessages([
+        'email' => [trans('auth.failed')],
+    ])->errorBag('login')->redirectTo(route('login'));
+}
 
     public function handleRoles()
     {

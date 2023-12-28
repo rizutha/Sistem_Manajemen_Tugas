@@ -20,6 +20,17 @@
     <!-- Jumbotron -->
     <div class="text-lg-start m-5 px-4 py-5 text-center" style="background-color: hsl(0, 0%, 96%)">
         <div class="container">
+            @if ($errors->has('login'))
+            <script>
+                // Ensure that the SweetAlert script is properly included and triggered
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: '{{ $errors->first('login') }}',
+                });
+            </script>
+        @endif
+
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-lg-0 mb-5">
                     <h1 class="display-5 fw-bold ls-tight my-5">
@@ -27,16 +38,17 @@
                         <span class="text-primary">Mahasiswa</span>
                     </h1>
                     <p style="color: hsl(217, 10%, 50.8%)">
-                        Selamat Datang di Website uuntuk manajemen tugas mahasiswa!
+                        Selamat Datang di Website untuk Memanajemen Tugas Mahasiswa!
                     </p>
                 </div>
 
                 <div class="col-lg-6 mb-lg-0 mb-5">
                     <div class="card">
                         <div class="card-body px-md-5 py-5">
-                            <form action="/login" method="post">
+                            <form id="loginForm" action="/login" method="post">
                                 @csrf
-                                <h3 class>Login</h3>
+                                <h3 class="mb-4">Login</h3>
+
                                 <!-- Email input -->
                                 <div class="form-outline mb-4 mt-4">
                                     <label class="form-label" for="form3Example3">Email address</label>
@@ -53,7 +65,6 @@
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Login
                                 </button>
-
                             </form>
                         </div>
                     </div>
@@ -67,6 +78,52 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <!-- Optional: Add your own JavaScript scripts here -->
+
+    {{-- SCRIPT VERIFIKASI --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Validasi sederhana
+            var email = document.getElementById('form3Example3').value.trim();
+            var password = document.getElementById('form3Example4').value.trim();
+
+            if (email === '' && password === '') {
+                // Tampilkan SweetAlert untuk pesan kesalahan
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Silahkan Masukan Email & Password.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            } else if (email === '') {
+                // Validasi alamat email
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Silahkan Masukan Email',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            } else if (password === '') {
+                // Validasi alamat email
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Silahkan Masukan Password',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            // Jika validasi lolos, submit formulir
+            event.target.submit();
+        });
+    </script>
+
 
 </body>
 
