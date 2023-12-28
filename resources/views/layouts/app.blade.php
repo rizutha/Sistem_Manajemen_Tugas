@@ -51,7 +51,7 @@
 
             {{-- Logic Nav Item --}}
             @switch(auth()->user()->role)
-            {{-- Jika Role Admin --}}
+                {{-- Jika Role Admin --}}
                 @case('admin')
                     {{-- Dosen Nav Item --}}
                     <hr class="sidebar-divider">
@@ -77,7 +77,8 @@
                     </li>
                     {{-- End Mahasiswa Nav Item --}}
                 @break
-            {{-- Jika Role Dosen --}}
+
+                {{-- Jika Role Dosen --}}
                 @case('dosen')
                     {{-- Mahasiswa Nav Item --}}
                     <hr class="sidebar-divider">
@@ -103,7 +104,8 @@
                     </li>
                     {{-- End Tugas Nav Item --}}
                 @break
-            {{-- Jika Role Mahasiswa --}}
+
+                {{-- Jika Role Mahasiswa --}}
                 @case('mahasiswa')
                     {{-- Tugas Nav Item --}}
                     <hr class="sidebar-divider">
@@ -270,6 +272,14 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('templates/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('templates/js/demo/chart-pie-demo.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('templates/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('templates/js/demo/datatables-demo.js') }}"></script>
+
 
     {{-- KUMPULAN ALERT --}}
     <script>
