@@ -22,9 +22,9 @@ class MahasiswaSeeder extends Seeder
                 'kontak' => '089121212121',
                 'email' => 'rifqi@gmail.com',
                 'prodi' => 'Sistem Informasi',
-                'semester' => '1',
+                'semester' => '3',
                 'foto' => 'images/rifqi.png',
-                'users_id' => '3',
+                'users_id' => '6',
             ],
             [
                 'nim' => '12221362',
@@ -36,7 +36,7 @@ class MahasiswaSeeder extends Seeder
                 'prodi' => 'Sistem Informasi',
                 'semester' => '3',
                 'foto' => 'images/jacob.png',
-                'users_id' => '3',
+                'users_id' => '7',
             ],
             [
                 'nim' => '12221283',
@@ -48,7 +48,7 @@ class MahasiswaSeeder extends Seeder
                 'prodi' => 'Sistem Informasi',
                 'semester' => '3',
                 'foto' => 'images/kulum.png',
-                'users_id' => '3',
+                'users_id' => '8',
             ],
             [
                 'nim' => '12221531',
@@ -60,7 +60,7 @@ class MahasiswaSeeder extends Seeder
                 'prodi' => 'Sistem Informasi',
                 'semester' => '3',
                 'foto' => 'images/khasnah.png',
-                'users_id' => '3',
+                'users_id' => '9',
             ],
             [
                 'nim' => '12221435',
@@ -72,7 +72,7 @@ class MahasiswaSeeder extends Seeder
                 'prodi' => 'Sistem Informasi',
                 'semester' => '3',
                 'foto' => 'images/ivana.png',
-                'users_id' => '3',
+                'users_id' => '10',
             ],
         ]);
     }

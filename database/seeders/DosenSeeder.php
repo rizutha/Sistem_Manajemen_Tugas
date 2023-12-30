@@ -36,7 +36,7 @@ class DosenSeeder extends Seeder
                 'email' => 'hub@gmail.com',
                 'keilmuan' => 'Sistem Informasi',
                 'foto' => 'images/husni2.png',
-                'users_id' => '2',
+                'users_id' => '3',
             ],
             [
                 'nip' => '23232325',
@@ -48,7 +48,7 @@ class DosenSeeder extends Seeder
                 'email' => 'sop@gmail.com',
                 'keilmuan' => 'Sistem Informasi',
                 'foto' => 'images/sopian.png',
-                'users_id' => '2',
+                'users_id' => '4',
             ],
             [
                 'nip' => '23232326',
@@ -60,7 +60,7 @@ class DosenSeeder extends Seeder
                 'email' => 'ffw@gmail.com',
                 'keilmuan' => 'Sistem Informasi',
                 'foto' => 'images/fanny.png',
-                'users_id' => '2',
+                'users_id' => '5',
             ],
         ]);
     }
