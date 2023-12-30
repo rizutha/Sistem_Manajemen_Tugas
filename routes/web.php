@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
 Route::get('/beranda', function () {
     return view('dashboard');
@@ -44,14 +45,14 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::delete('/dosen/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
 
     Route::get('/akun', [AuthController::class, 'index']);
-Route::get('/akun/create', [AuthController::class, 'create']);
-Route::get('/akun/detail/{id}', [AuthController::class, 'detail']);
-Route::get('/akun/edit/{id}', [AuthController::class, 'edit']);
-Route::post('/akun/store', [AuthController::class, 'store']);
-Route::post('/akun/update/{id}', [AuthController::class, 'akunUpdate']);
-Route::get('/akun/{id}', [AuthController::class, 'show'])->name('mahasiswa.show');
-Route::post('/akun/{id}', [AuthController::class, 'update']);
-Route::delete('/akun/destroy/{id}', [AuthController::class, 'destroy']);
+    Route::get('/akun/create', [AuthController::class, 'create']);
+    Route::get('/akun/detail/{id}', [AuthController::class, 'detail']);
+    Route::get('/akun/edit/{id}', [AuthController::class, 'edit']);
+    Route::post('/akun/store', [AuthController::class, 'store']);
+    Route::post('/akun/update/{id}', [AuthController::class, 'akunUpdate']);
+    Route::get('/akun/{id}', [AuthController::class, 'show'])->name('mahasiswa.show');
+    Route::post('/akun/{id}', [AuthController::class, 'update']);
+    Route::delete('/akun/destroy/{id}', [AuthController::class, 'destroy']);
 
 });
 Route::group(['middleware' => 'checkRole:dosen'], function () {

@@ -12,12 +12,18 @@ class AuthController extends Controller
     /**
      * Handle an authentication attempt.
      */
+    public function showLoginForm(){
+        return view('/login');
+    }
     public function auth(Request $request)
     {
         // dd($request->all());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ],[
+            'email' => 'Email wajib diiisi',
+            'password' => 'Password wajib diisi',
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -25,26 +31,14 @@ class AuthController extends Controller
 
             return redirect()->intended('/beranda');
         }
+        else {
+            return redirect('/login')->withErrors('Email & Password salah!');
+        }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-
-    public function handleRoles()
-    {
-        if (Auth::check()) {
-            $roles = auth()->user()->roles;
-            if ($roles == 'admin') {
-                return redirect('/guru/index')->with('success', 'Masuk Sebagai Admin!');
-            } elseif ($roles == 'dosen') {
-                return redirect('/guru/index')->with('success', 'Masuk Sebagai guru!');
-            } else {
-                return redirect('/mahasiswa/index')->with('success', 'Masuk Sebagai Siswa!');
-            }
-        }
-    }
-
     public function logout()
     {
         Auth::logout();

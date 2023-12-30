@@ -16,10 +16,6 @@
                     <th>ID</th>
                     <th>NIM</th>
                     <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Kontak</th>
-                    <th>Email</th>
                     <th>Prodi</th>
                     <th>Semester</th>
                     <th>Aksi</th>
@@ -31,10 +27,6 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $mahasiswa->nim }}</td>
                         <td>{{ $mahasiswa->nama }}</td>
-                        <td>{{ $mahasiswa->alamat }}</td>
-                        <td>{{ $mahasiswa->tgl_lahir }}</td>
-                        <td>{{ $mahasiswa->kontak }}</td>
-                        <td>{{ $mahasiswa->email }}</td>
                         <td>{{ $mahasiswa->prodi }}</td>
                         <td>{{ $mahasiswa->semester }}</td>
                         <td>
