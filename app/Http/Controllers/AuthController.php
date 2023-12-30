@@ -22,8 +22,8 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ],[
-            'email' => "Email wajib diiisi",
-            'password' => ['Password wajib diisi'],
+            'email' => 'Email wajib diiisi',
+            'password' => 'Password wajib diisi',
         ]);
 
         if (Auth::attempt($credentials)) {
