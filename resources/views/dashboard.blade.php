@@ -15,6 +15,9 @@
             @switch(auth()->user()->role)
                 @case('admin')
                     <div class="row d-flex justify-content-center">
+                        <a href="/akun" class="btn btn-primary btn-lg mb-2" style="width: 300px">Lihat Data Akun</a>
+                    </div>
+                    <div class="row d-flex justify-content-center">
                         <a href="/mahasiswa" class="btn btn-primary btn-lg" style="width: 300px">Lihat Data Mahasiswa</a>
                     </div>
                     <div class="row d-flex justify-content-center">
