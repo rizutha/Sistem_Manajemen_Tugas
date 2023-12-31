@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <h2>Data Pengumpulan Tugas</h2>
 
         <!-- Tampilkan daftar pengumpulan untuk dosen -->
@@ -32,7 +32,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>     
-        <a href="{{ route('tugasmhs') }}" class="btn btn-secondary mt-3">Kembali</a>   
+        </table>
+        <a href="{{ route('tugasmhs') }}" class="btn btn-secondary mt-3">Kembali</a>
     </div>
 @endsection

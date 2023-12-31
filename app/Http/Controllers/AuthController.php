@@ -21,12 +21,18 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ],[
+            'email' => 'Email wajib diiisi',
+            'password' => 'Password wajib diisi',
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->intended('/beranda');
+        }
+        else {
+            return redirect('/login')->withErrors('Email & Password salah!');
         }
 
         return back()->withErrors([
