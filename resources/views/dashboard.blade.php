@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@if (Session::has('success'))
-        <div class="alert  d-flex align-items-center ">
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        </div>
-    @endif
+                @notifyCss
+                <x-notify::notify />
+                @notifyJs
     <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <div class="col text-center">
             <div class="row">

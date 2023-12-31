@@ -21,16 +21,7 @@
     <!-- Jumbotron -->
     <div class="text-lg-start m-5 px-4 py-5 text-center" style="background-color: hsl(0, 0%, 96%)">
         <div class="container">
-            @if ($errors->has('login'))
-            <script>
-                // Ensure that the SweetAlert script is properly included and triggered
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Login Failed',
-                    text: '{{ $errors->first('login') }}',
-                });
-            </script>
-        @endif
+
 
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-lg-0 mb-5">
@@ -39,13 +30,15 @@
                         <span class="text-primary">Mahasiswa</span>
                     </h1>
                     <p style="color: hsl(217, 10%, 50.8%)">
-                        Selamat Datang di Website untuk manajemen tugas mahasiswa!
                         Selamat Datang di Website untuk Memanajemen Tugas Mahasiswa!
                     </p>
                 </div>
 
                 <div class="col-lg-6 mb-lg-0 mb-5">
                     <div class="card">
+                        @notifyCss
+                        <x-notify::notify />
+                        @notifyJs
                         <div class="card-body px-md-5 py-5">
                             <form id="loginForm" action="/login" method="post">
                                 @csrf

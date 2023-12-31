@@ -30,12 +30,11 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
-            Session::flash('success', 'Login Berhasil!');
+            notify()->success('Login berhasil!');
             return redirect()->intended('/beranda');
         }
 
-        Session::flash('error', 'Login Gagal! Periksa kembali Email dan Password Anda.');
-
+        notify()->error('Login Gagal! Periksa kembali Email dan Password Anda!');
         return redirect()->route('login');
     }
     public function logout()
