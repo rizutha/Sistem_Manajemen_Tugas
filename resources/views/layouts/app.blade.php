@@ -306,8 +306,8 @@
                 text: 'Apakah anda ingin logout?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Y, logout',
-                cancelButtonText: 'Ah nggak jadi ah'
+                confirmButtonText: 'Konfirmasi Logout',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Jika pengguna mengonfirmasi logout, arahkan ke tautan logout
