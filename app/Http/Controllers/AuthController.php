@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -21,23 +22,21 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ],[
-            'email' => 'Email wajib diiisi',
-            'password' => 'Password wajib diisi',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        if (empty($credentials['email']) || empty($credentials['password'])) {
+            // Tampilkan pesan SweetAlert2 jika email atau password kosong
+            return response()->json(['error' => 'Email dan password harus diisi'], 422);
+        }
 
+        if (Auth::attempt($credentials)) {
+            Session::flash('success', 'Login Berhasil!');
             return redirect()->intended('/beranda');
         }
-        else {
-            return redirect('/login')->withErrors('Email & Password salah!');
-        }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        Session::flash('error', 'Login Gagal! Periksa kembali Email dan Password Anda.');
+
+        return redirect()->route('login');
     }
     public function logout()
     {
