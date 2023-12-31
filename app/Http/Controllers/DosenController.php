@@ -14,8 +14,8 @@ class DosenController extends Controller
 {
     public function index()
     {
-        $query = Dosen::all(); // Changed from Employee to Dosen
-        return view('dosen.index', compact('query')); // Changed from employee.index to dosen.index
+        $query = Dosen::orderBy('id', 'asc')->paginate(5);
+        return view('dosen.index', ['queries' => $query]);
     }
 
     public function create()
