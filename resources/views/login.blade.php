@@ -42,7 +42,7 @@
                         <div class="card-body px-md-5 py-5">
                             <form id="loginForm" action="/login" method="post">
                                 @csrf
-                                <h3 class="mb-4">Login</h3>
+                                <h2 class="mb-4"><strong>Silahkan Login terlebih dahulu</strong></h2>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4 mt-4">
@@ -57,7 +57,7 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn bg-primary text-white">
                                     Login
                                 </button>
                             </form>

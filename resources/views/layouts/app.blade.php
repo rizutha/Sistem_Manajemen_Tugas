@@ -58,6 +58,18 @@
             @switch(auth()->user()->role)
                 {{-- Jika Role Admin --}}
                 @case('admin')
+                    {{-- Akun Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Akun
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'akun') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/akun">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Data Akun</span></a>
+                    </li>
+                    {{-- End Dosen Nav Item --}}
+
                     {{-- Dosen Nav Item --}}
                     <hr class="sidebar-divider">
                     <div class="sidebar-heading">

@@ -12,17 +12,14 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table-bordered table" id="dosenTable" width="100%" cellspacing="0">
+            <table class="table-hover table" id="dosenTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>NIP</th>
                         <th>Nama</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Alamat</th>
-                        <th>Kontak</th>
                         <th>Email</th>
-                        <th>Dosen Matkul</th>
+                        <th>Keilmuan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -32,9 +29,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $dosen->nip }}</td>
                             <td>{{ $dosen->nama }}</td>
-                            <td>{{ $dosen->tgl_lahir }}</td>
-                            <td>{{ $dosen->alamat }}</td>
-                            <td>{{ $dosen->kontak }}</td>
                             <td>{{ $dosen->email }}</td>
                             <td>{{ $dosen->keilmuan }}</td>
                             <td>

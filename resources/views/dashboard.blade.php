@@ -31,7 +31,7 @@
                     </div>
                 @break
 
-                @case('admin')
+                @case('mahasiswa')
                     <div class="row d-flex justify-content-center">
                         <a href="/tugasmhs" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
