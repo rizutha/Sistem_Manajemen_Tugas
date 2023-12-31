@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengumpulan;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,15 @@ class PengumpulanController extends Controller
         $query = Pengumpulan::with('mahasiswa', 'tugas')->get();
         return view('pengumpulan.index', compact('query'));
     }
+
+    public function mhsindex()
+    {
+        $auth = auth()->user()->id;
+        $mahasiswa = Mahasiswa::where('users_id', $auth)->first();
+        $query = Pengumpulan::where('id_mahasiswas', $mahasiswa)->get();
+        return view('pengumpulan.index', compact('query'));
+    }
+
     public function create(Request $request)
     {
         // Ambil data dari query string
@@ -42,7 +52,7 @@ class PengumpulanController extends Controller
             $pengumpulanBaru = new Pengumpulan([
                 'id_tugass' => $tugasId,
                 'id_mahasiswas' => auth()->user()->mahasiswa->id,
-                
+
                 'link_tugas' => $linkTugas,
                 'tgl_pengumpulan' => now(),
             ]);

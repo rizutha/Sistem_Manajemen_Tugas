@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <h2>Data Mahasiswa</h2>
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -23,7 +23,7 @@
             <tbody>
                 @foreach($query as $mahasiswa)
                     <tr>
-                        
+
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $mahasiswa->nim }}</td>
                         <td>{{ $mahasiswa->nama }}</td>

@@ -119,7 +119,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="my-2">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan
+                                Data</button>
                             <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger"><i
                                     class="fa fa-arrow-left"></i>Kembali</a>
                         </div>

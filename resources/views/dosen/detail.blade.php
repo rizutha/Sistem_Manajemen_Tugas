@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-light rounded-2 container p-5 shadow-lg">
+    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <h2>Detail Dosen</h2>
 
         <div class="row">

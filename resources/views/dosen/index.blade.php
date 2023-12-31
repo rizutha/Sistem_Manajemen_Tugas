@@ -16,24 +16,16 @@
                     <th>ID</th>
                     <th>NIP</th>
                     <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Alamat</th>
-                    <th>Kontak</th>
-                    <th>Email</th>
                     <th>Dosen Matkul</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($query as $dosen)
+                @foreach ($queries as $dosen)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $dosen->nip }}</td>
                         <td>{{ $dosen->nama }}</td>
-                        <td>{{ $dosen->tgl_lahir }}</td>
-                        <td>{{ $dosen->alamat }}</td>
-                        <td>{{ $dosen->kontak }}</td>
-                        <td>{{ $dosen->email }}</td>
                         <td>{{ $dosen->keilmuan }}</td>
                         <td>
                             <a href="{{ route('dosen.show', $dosen->id) }}" class="btn btn-info btn-sm">Detail</a>
@@ -49,5 +41,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $queries->links() }}
     </div>
 @endsection
