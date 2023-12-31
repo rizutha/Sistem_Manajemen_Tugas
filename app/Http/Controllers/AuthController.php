@@ -12,6 +12,9 @@ class AuthController extends Controller
     /**
      * Handle an authentication attempt.
      */
+    public function showLoginForm(){
+        return view('/login');
+    }
     public function auth(Request $request)
     {
         // dd($request->all());
@@ -30,21 +33,6 @@ class AuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-
-    public function handleRoles()
-    {
-        if (Auth::check()) {
-            $roles = auth()->user()->roles;
-            if ($roles == 'admin') {
-                return redirect('/guru/index')->with('success', 'Masuk Sebagai Admin!');
-            } elseif ($roles == 'dosen') {
-                return redirect('/guru/index')->with('success', 'Masuk Sebagai guru!');
-            } else {
-                return redirect('/mahasiswa/index')->with('success', 'Masuk Sebagai Siswa!');
-            }
-        }
-    }
-
     public function logout()
     {
         Auth::logout();
