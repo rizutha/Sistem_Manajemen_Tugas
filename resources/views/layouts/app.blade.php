@@ -36,7 +36,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-chalkboard-teacher"></i>
                 </div>
@@ -70,6 +70,17 @@
                     </li>
                     {{-- End Dosen Nav Item --}}
 
+                    {{-- Dosen Nav Item --}}
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Akun
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'akun') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/akun">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Akun</span></a>
+                    </li>
+                    {{-- End Dosen Nav Item --}}
                     {{-- Dosen Nav Item --}}
                     <hr class="sidebar-divider">
                     <div class="sidebar-heading">
