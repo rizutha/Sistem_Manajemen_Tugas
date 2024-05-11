@@ -92,6 +92,15 @@
                             <i class="fas fa-user-graduate"></i>
                             <span>Data Mahasiswa</span></a>
                     </li>
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Kelas
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'kelas') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/kelas">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Data Kelas</span></a>
+                    </li>
                     {{-- End Mahasiswa Nav Item --}}
                 @break
 

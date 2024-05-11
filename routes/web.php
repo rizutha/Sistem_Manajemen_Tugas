@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PengumpulanController;
 use App\Http\Controllers\TugasController;
@@ -54,6 +55,8 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::post('/akun/{id}', [AuthController::class, 'update']);
     Route::delete('/akun/destroy/{id}', [AuthController::class, 'destroy']);
 
+    Route::resource('kelas', KelasController::class);
+
 });
 Route::group(['middleware' => 'checkRole:dosen'], function () {
 
@@ -76,7 +79,7 @@ Route::group(['middleware' => 'checkRole:mahasiswa'], function () {
     Route::get('/tugasmhs', [TugasController::class, 'detail'])->name('tugasmhs');
     Route::get('/profilmhs', [MahasiswaController::class, 'showProfil'])->name('profilmhs');
     Route::get('/pengumpulan', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
-    Route::get('/pengumpulantugas', [PengumpulanController::class, 'mhsindex'])->name('pengumpulan.index');
+    Route::get('/pengumpulantugas', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
     Route::get('/pengumpulan/create', [PengumpulanController::class, 'create'])->name('pengumpulan.create');
 
 });
