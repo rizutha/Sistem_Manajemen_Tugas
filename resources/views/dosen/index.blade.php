@@ -21,9 +21,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($queries as $dosen => $row)
+                @foreach ($dosens as $dosen => $row)
                     <tr>
-                        <td>{{ $queries->firstItem() + $dosen }}</td>
+                        <td>{{ $dosens->firstItem() + $dosen }}</td>
                         <td>{{ $row->nip }}</td>
                         <td>{{ $row->nama }}</td>
                         <td>{{ $row->keilmuan }}</td>
@@ -41,6 +41,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $queries->links() }}
+        {{ $dosens->links() }}
     </div>
 @endsection

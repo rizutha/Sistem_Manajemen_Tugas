@@ -34,17 +34,6 @@
                             @enderror
                         </div>
                         <div class="row py-2">
-                            <label for="password">Password</label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Masukkan Password">
-                            @error('password')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
                             <label for="email">Email <span class="text-danger">*</span></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 placeholder="Masukkan Email" value="{{ $akun->email }}">

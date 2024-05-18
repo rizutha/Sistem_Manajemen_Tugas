@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kelas');
             $table->unsignedBigInteger('dosen_pengajar');
             $table->string('prodi');
+            $table->string('nama_matkul');
             $table->foreign('id_kelas')->references('id')->on('kelass');
             $table->foreign('dosen_pengajar')->references('id')->on('dosens');
             $table->timestamps();

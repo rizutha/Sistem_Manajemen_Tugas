@@ -12,16 +12,6 @@
                 <div class="row">
                     <div class="col px-4">
                         <div class="row py-2">
-                            <label for="nim">NIM <span class="text-danger">*</span></label>
-                            <input type="text" name="nim" class="form-control @error('nim') is-invalid @enderror"
-                                placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}">
-                            @error('nim')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
                             <label for="nama">Nama <span class="text-danger">*</span></label>
                             <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
                                 placeholder="Masukkan Nama" value="{{ $mahasiswa->nama }}">
@@ -57,37 +47,6 @@
                             <input type="text" name="kontak" class="form-control @error('kontak') is-invalid @enderror"
                                 placeholder="Masukkan Kontak" value="{{ $mahasiswa->kontak }}">
                             @error('kontak')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
-                            <label for="email">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="Masukkan Email" value="{{ $mahasiswa->email }}">
-                            @error('email')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
-                            <label for="prodi">Program Studi <span class="text-danger">*</span></label>
-                            <input type="text" name="prodi" class="form-control @error('prodi') is-invalid @enderror"
-                                placeholder="Masukkan Program Studi" value="{{ $mahasiswa->prodi }}">
-                            @error('prodi')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
-                            <label for="semester">Semester <span class="text-danger">*</span></label>
-                            <input type="text" name="semester"
-                                class="form-control @error('semester') is-invalid @enderror" placeholder="Masukkan Semester"
-                                value="{{ $mahasiswa->semester }}">
-                            @error('semester')
                                 <small class="text-danger">
                                     {{ $message }}
                                 </small>

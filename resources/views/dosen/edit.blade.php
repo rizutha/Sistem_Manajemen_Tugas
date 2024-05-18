@@ -13,21 +13,18 @@
                 <div class="row">
                     <div class="col px-4">
                         <div class="row py-2">
-                            <label for="">NIP <span class="text-danger">*</span></label>
-                            <input type="text" name="nip"
-                                class="form-control @if ($errors->has('nip')) is-invalid @endif"
-                                placeholder="Masukkan NIP" value="{{ $dosen->nip }}">
-                            @if ($errors->has('nip'))
-                                <small class="text-danger">
-                                    {{ $errors->first('nip') }}
-                                </small>
-                            @endif
-                        </div>
-                        <div class="row py-2">
-                            <label for="">Nama <span class="text-danger">*</span></label>
+                            <label for="users_id">User</label>
+                            <select name="users_id" class="form-control" required>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{ $dosen->users_id == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }} ({{ $user->email }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <label for="">Nama <span class="text-danger">*</span></label>
                             <input type="text" name="nama"
                                 class="form-control @if ($errors->has('nama')) is-invalid @endif"
-                                placeholder="Masukkan Nama" value="{{ $dosen->nama }}">
+                                placeholder="Masukkan Nama" value="{{ $dosen->nama }}"> --}}
                             @if ($errors->has('nama'))
                                 <small class="text-danger">
                                     {{ $errors->first('nama') }}

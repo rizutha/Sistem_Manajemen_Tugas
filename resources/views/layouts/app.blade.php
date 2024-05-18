@@ -101,6 +101,15 @@
                             <i class="fas fa-user-graduate"></i>
                             <span>Data Kelas</span></a>
                     </li>
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Matkul
+                    </div>
+                    <li class="{{ strpos(request()->url(), 'mapel') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/mapel">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Data Mata Kuliah</span></a>
+                    </li>
                     {{-- End Mahasiswa Nav Item --}}
                 @break
 
@@ -138,8 +147,8 @@
                     <div class="sidebar-heading">
                         Tugas
                     </div>
-                    <li class="{{ strpos(request()->url(), 'tugasmhs') !== false ? 'nav-item active' : 'nav-item' }}">
-                        <a class="nav-link" href="/tugasmhs">
+                    <li class="{{ strpos(request()->url(), 'pengumpulan') !== false ? 'nav-item active' : 'nav-item' }}">
+                        <a class="nav-link" href="/pengumpulan">
                             <i class="fas fa-fw fa-tasks"></i>
                             <span>Data Tugas</span></a>
                     </li>

@@ -1,63 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h2>Edit Tugas</h2>
-        @if (auth()->user()->role == 'dosen')
-        <form action="/tugas/{{ $tugas->id }}/update" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="matkul">Mata Kuliah:</label>
-                    <input type="text" class="form-control" id="matkul" name="matkul" value="{{ $tugas->matkul }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="semester">Semester:</label>
-                    <input type="text" class="form-control" id="semester" name="semester" value="{{ $tugas->semester }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="pertemuan">Pertemuan:</label>
-                    <input type="text" class="form-control" id="pertemuan" name="pertemuan"
-                        value="{{ $tugas->pertemuan }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="tgl_buat">Tanggal Pembuatan:</label>
-                    <input type="date" class="form-control" id="tgl_buat" name="tgl_buat" value="{{ $tugas->tgl_buat }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="tgl_dl">Tanggal Deadline:</label>
-                    <input type="date" class="form-control" id="tgl_dl" name="tgl_dl"
-                        value="{{ $tugas->tgl_dl }}" required>
-                </div>
-                <div class="form-group col-6">
-                    <label for="file_tugas">File Tugas <span class="text-danger">*</span></label>
-                    <input type="file" name="file_tugas" class="form-control-file @error('file_tugas') is-invalid @enderror" placeholder="Pilih File" value="{{ old('file_tugas') }}">
-                    <small>Tipe File: Pdf. Max: 10 MB.</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('tugas.index') }}" class="btn btn-secondary">Kembali</a>
-            </form>
-        @endif
-        @if (auth()->user()->role == 'mahasiswa')
-            <form action="/tugas/{id}/pengumpulan" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="link_tugas">Link Tugas:</label>
-                    <input type="text" class="form-control" id="link_tugas" name="link_tugas"
-                        value="{{ old('link_tugas') }}">
-                </div>
-                <div class="form-group">
-                    <label for="tgl_pengumpulan">Tanggal Pengumpulan:</label>
-                    <input type="date" class="form-control" id="tgl_pengumpulan" name="tgl_pengumpulan"
-                        value="{{ old('tgl_pengumpulan') }}">
-                </div>
+<div class="container">
+    <h1>Edit Tugas</h1>
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('tugas.index') }}" class="btn btn-secondary">Kembali</a>
-            </form>
-        @else
-        @endif
-    </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('tugas.update', $tugas->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="dosen_id" value="{{ $dosen->id }}">
+
+        <div class="form-group">
+            <label for="id_mapel">Mata Pelajaran</label>
+            <select name="id_mapel" class="form-control" required>
+                <option value="">Pilih Mata Pelajaran</option>
+                @foreach ($mapels as $m)
+                    <option value="{{ $m->id }}" {{ $tugas->id_mapel == $m->id ? 'selected' : '' }}>{{ $m->nama_matkul }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pertemuan">Pertemuan</label>
+            <input type="text" name="pertemuan" class="form-control" value="{{ $tugas->pertemuan }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tgl_buat">Tanggal Buat</label>
+            <input type="date" name="tgl_buat" class="form-control" value="{{ $tugas->tgl_buat }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tgl_dl">Tanggal Deadline</label>
+            <input type="date" name="tgl_dl" class="form-control" value="{{ $tugas->tgl_dl }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="file_tugas">File Tugas (Opsional)</label>
+            @if($tugas->file_tugas)
+                <div>
+                    <a href="{{ Storage::url('tugas/' . $tugas->file_tugas) }}" target="_blank">Lihat File Tugas</a>
+                </div>
+            @endif
+            <input type="file" name="file_tugas" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Tugas</button>
+    </form>
+</div>
 @endsection

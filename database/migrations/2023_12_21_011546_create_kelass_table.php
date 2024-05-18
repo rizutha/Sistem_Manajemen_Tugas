@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('wali_kelas');
             $table->string('kelas');
             $table->string('prodi');
+            $table->string('semester');
             $table->foreign('wali_kelas')->references('id')->on('dosens');
             $table->timestamps();
         });

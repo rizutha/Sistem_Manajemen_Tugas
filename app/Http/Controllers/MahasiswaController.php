@@ -1,74 +1,66 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Kelas;
 use App\Models\Mahasiswa;
-use App\Models\Pengumpulan;
-use App\Models\Tugas;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        $query = Mahasiswa::orderBy('id', 'asc')->paginate(5);
-        return view('mahasiswa.index', ['queries' => $query]);
+        $mahasiswas = Mahasiswa::with('user', 'kelas')->paginate(10); // Ubah menjadi paginate()
+        return view('mahasiswa.index', compact('mahasiswas'));
     }
 
     public function create()
     {
-        return view('mahasiswa.create');
+        $users = User::where('role', 'mahasiswa')->whereDoesntHave('mahasiswa')->get(); // Hanya pengguna dengan role dosen yang belum ditambahkan ke data dosen
+
+        // $users = User::where('role', 'mahasiswa')->get();
+        $kelas = Kelas::all();
+        return view('mahasiswa.create', compact('users', 'kelas'));
     }
-
     public function store(Request $request)
-    {
-        // Validasi data
-        $request->validate(
-            [
-                'nim' => 'required',
-                'nama' => 'required',
-                'tgl_lahir' => 'required',
-                'alamat' => 'required',
-                'kontak' => 'required',
-                'email' => 'required|email',
-                'prodi' => 'required',
-                'semester' => 'required',
-                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,jfif,svg|max:10000',
-            ],
-            [
-                'nim.required' => 'Kolom NIM tidak boleh kosong',
-                'nama.required' => 'Kolom Nama tidak boleh kosong',
-                'tgl_lahir.required' => 'Kolom Tanggal Lahir tidak boleh kosong',
-                'alamat.required' => 'Kolom Alamat tidak boleh kosong',
-                'kontak.required' => 'Kolom Kontak tidak boleh kosong',
-                'email.required' => 'Kolom Email tidak boleh kosong',
-                'email.email' => 'Format Email tidak valid',
-                'prodi.required' => 'Kolom Program Studi tidak boleh kosong',
-                'semester.required' => 'Kolom Semester tidak boleh kosong',
-                'foto.required' => 'Silahkan pilih file foto',
-                'foto.mimes' => 'Tipe File harus JPG/JPEG/PNG/GIF/SVG',
-                'foto.max' => 'Ukuran file tidak boleh dari 10 MB',
-            ]
-        );
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $filename = 'FTO' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
-            $foto->storeAs('public/mahasiswa/' . $filename);
-        }
-        Mahasiswa::create([
-            'nim' => $request->nim,
-            'nama' => $request->nama,
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
-            'kontak' => $request->kontak,
-            'email' => $request->email,
-            'prodi' => $request->prodi, // Ganti dengan atribut yang sesuai pada model Mahasiswa
-            'semester' => $request->semester, // Ganti dengan atribut yang sesuai pada model Mahasiswa
-            'foto' => $filename,
-        ]);
+{
+    $request->validate([
+        'id_kelas' => 'required',
+        'alamat' => 'required',
+        'tgl_lahir' => 'required|date',
+        'kontak' => 'required',
+        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
+    // Logika untuk menentukan NIM otomatis
+    $nim = Mahasiswa::count() + 1;
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan');
+    // Pemanggilan Nama dari Tabel User
+    $user_id = $request->input('users_id'); // Ambil nilai users_id dari dropdown
+    $user = User::find($user_id); // Cari data user berdasarkan ID yang dipilih
+
+    if ($request->hasFile('foto')) {
+        $foto = $request->file('foto');
+        $filename = 'FTM' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
+        $foto->storeAs('public/mahasiswa/' . $filename);
+    }
+    // Simpan data mahasiswa baru
+    Mahasiswa::create([
+        'users_id' => $user->id,
+        'id_kelas' => $request->id_kelas,
+        'nim' => $nim,
+        'nama' => $user->name, // Gunakan nama dari user yang dipilih
+        'alamat' => $request->alamat,
+        'tgl_lahir' => $request->tgl_lahir,
+        'kontak' => $request->kontak,
+        'email' => $user->email, // Gunakan email dari user yang dipilih
+        'foto' => $filename,
+    ]);
+
+    return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
 
     public function show($id)
@@ -77,116 +69,79 @@ class MahasiswaController extends Controller
         return view('mahasiswa.detail', compact('mahasiswa'));
     }
 
+
     public function edit($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        $kelas = Kelas::all();
+        return view('mahasiswa.edit', compact('mahasiswa', 'kelas'));
     }
 
     public function update(Request $request, $id)
     {
-        $mahasiswa = Mahasiswa::find($id);
-        $request->validate(
-            [
-                'nim' => 'required',
-                'nama' => 'required',
-                'tgl_lahir' => 'required',
-                'alamat' => 'required',
-                'kontak' => 'required',
-                'email' => 'required|email',
-                'prodi' => 'required',
-                'semester' => 'required',
-                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,jfif,svg|max:10000',
-            ],
-            [
-                'nim.required' => 'Kolom NIM tidak boleh kosong',
-                'nama.required' => 'Kolom Nama tidak boleh kosong',
-                'tgl_lahir.required' => 'Kolom Tanggal Lahir tidak boleh kosong',
-                'alamat.required' => 'Kolom Alamat tidak boleh kosong',
-                'kontak.required' => 'Kolom Kontak tidak boleh kosong',
-                'email.required' => 'Kolom Email tidak boleh kosong',
-                'email.email' => 'Format Email tidak valid',
-                'prodi.required' => 'Kolom Program Studi tidak boleh kosong',
-                'semester.required' => 'Kolom Semester tidak boleh kosong',
-                'foto.required' => 'Silahkan pilih file foto',
-                'foto.mimes' => 'Tipe File harus JPG/JPEG/PNG/GIF/SVG',
-                'foto.max' => 'Ukuran file tidak boleh dari 10 MB',
-            ]
-        );
-
-        if ($request->hasFile('foto')) {
-            Storage::delete('public/mahasiswa/' . $mahasiswa->foto);
-            $foto = $request->file('foto');
-            $filename = 'FTO' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
-            $foto->storeAs('public/mahasiswa/' . $filename);
-
-            $mahasiswa->update([
-                'nim' => $request->nim,
-                'nama' => $request->nama,
-                'tgl_lahir' => $request->tgl_lahir,
-                'alamat' => $request->alamat,
-                'kontak' => $request->kontak,
-                'email' => $request->email,
-                'prodi' => $request->prodi, // Ganti dengan atribut yang sesuai pada model id
-                'semester' => $request->semester, // Ganti dengan atribut yang sesuai pada model Mahasiswa
-                'foto' => $filename,
-            ]);
-        } else {
-            $id->update([
-                'nim' => $request->nim,
-                'nama' => $request->nama,
-                'tgl_lahir' => $request->tgl_lahir,
-                'alamat' => $request->alamat,
-                'kontak' => $request->kontak,
-                'email' => $request->email,
-                'prodi' => $request->prodi,
-                'semester' => $request->semester,
-            ]);
-        }
-
-        return redirect()
-            ->route('mahasiswa.index')
-            ->with('success', 'Data Mahasiswa Berhasil diUpdate');
-   }
-
-   public function destroy($id)
-   {
-
-       $mahasiswa = Mahasiswa::findOrFail($id);
-       // Hapus mahasiswa dari database
-       $mahasiswa->delete();
-       Storage::delete('public/mahasiswa/' . $mahasiswa->foto);
-
-       return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus');
-   }
-   public function showProfil()
-    {
-    // Mengambil ID Dosen dari user yang sedang login
-    $userId = auth()->user()->id;
-    $mahasiswa = Mahasiswa::where('users_id', $userId)->first();
-
-    return view('profilmhs', compact('mahasiswa'));
-    }
-
-    public function kumpulkanTugas(Request $request)
-    {
-        // Validasi data
-        $validatedData = $request->validate([
-            'tugas_id' => 'required|exists:tugas,id',
-            'link_tugas' => 'required|url',
-            // tambahkan aturan validasi lainnya sesuai kebutuhan
+        $request->validate([
+            'alamat' => 'required',
+            'tgl_lahir' => 'required|date',
+            'kontak' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Foto tidak wajib
         ]);
 
-        // Simpan pengumpulan tugas
-        $validatedData['mahasiswa_id'] = auth()->user()->mahasiswa->id;
-        Pengumpulan::create($validatedData);
+        $mahasiswa = Mahasiswa::findOrFail($id);
 
-        return redirect()->route('mahasiswa.tugas')->with('success', 'Tugas berhasil dikumpulkan');
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($mahasiswa->foto) {
+                Storage::delete('public/mahasiswa/' . $mahasiswa->foto);
+            }
+
+            // Simpan foto baru
+            $foto = $request->file('foto');
+            $filename = 'FTM' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
+            $foto->storeAs('public/mahasiswa', $filename);
+
+            // Perbarui nama file foto di database
+            $mahasiswa->foto = $filename;
+        }
+
+        // Perbarui data lainnya
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->tgl_lahir = $request->tgl_lahir;
+        $mahasiswa->kontak = $request->kontak;
+        $mahasiswa->save();
+
+        return redirect()->route('mahasiswa.index')
+            ->with('success', 'Data mahasiswa berhasil diperbarui.');
     }
 
-    public function pengumpulan()
+    public function destroy($id)
     {
-        $pengumpulanTugas = Pengumpulan::where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
-        return view('mahasiswa.pengumpulan_tugas', compact('pengumpulanTugas'));
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')
+            ->with('success', 'Data mahasiswa berhasil dihapus.');
     }
+
+
+
+    public function dataMhs()
+    {
+        $query = Mahasiswa::orderBy('id', 'asc')->paginate(5);
+        return view('datamhs', ['queries' => $query]);
+    }
+    public function detail($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        return view('detailmhs', compact('mahasiswa'));
+    }
+    public function showProfil()
+    {
+        $auth = auth()->user()->id;
+        $mahasiswa = Mahasiswa::where('users_id', $auth)->first();
+        return view('profilmhs', compact('mahasiswa'));
+    }
+
 }
+
+
+

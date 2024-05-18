@@ -16,6 +16,7 @@
                     <th>ID</th>
                     <th>Kelas</th>
                     <th>Prodi</th>
+                    <th>Semester</th>
                     <th>Wali Kelas</th>
                     <th>Aksi</th>
                 </tr>
@@ -26,6 +27,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $kelas->kelas }}</td>
                         <td>{{ $kelas->prodi }}</td>
+                        <td>{{ $kelas->semester }}</td>
                         <td>{{ $kelas->waliKelas->nama }}</td> <!-- Mengakses nama dosen dengan menggunakan relasi -->  
                         <td>
                             {{-- <a href="{{ route('dosen.show', $dosen->id) }}" class="btn btn-info btn-sm">Detail</a> --}}

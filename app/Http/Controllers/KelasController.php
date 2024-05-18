@@ -35,10 +35,12 @@ class KelasController extends Controller
         $request->validate([
             'kelas' => 'required',
             'prodi' => 'required',
+            'semester' => 'required',
             'wali_kelas' => 'required|exists:dosens,id', // Pastikan wali kelas yang dipilih adalah ID yang valid dari tabel dosens
         ], [
             'kelas.required' => 'Kolom Kelas tidak boleh kosong',
             'prodi.required' => 'Kolom Prodi tidak boleh kosong',
+            'semester.required' => 'Kolom Semester tidak boleh kosong',
             'wali_kelas.required' => 'Kolom Wali Kelas tidak boleh kosong',
             'wali_kelas.exists' => 'Wali kelas yang dipilih tidak valid',
         ]);
@@ -47,6 +49,7 @@ class KelasController extends Controller
         Kelas::create([
             'kelas' => $request->kelas, 
             'prodi' => $request->prodi,
+            'semester' => $request->semester,
             'wali_kelas' => $request->wali_kelas,
         ]);
 
@@ -72,7 +75,8 @@ class KelasController extends Controller
     public function edit(string $id)
     {
         $kelas = Kelas::findOrFail($id);
-        return view('kelas.edit', compact('kelas'));
+        $list_dosen = Dosen::all();
+        return view('kelas.edit', compact('kelas', 'list_dosen')); // Memasukkan variabel $list_dosen ke dalam view
     }
 
     /**
@@ -83,10 +87,12 @@ class KelasController extends Controller
         $request->validate([
             'kelas' => 'required',
             'prodi' => 'required',
+            'semester' => 'required',
             'wali_kelas' => 'required|exists:dosens,id', // Pastikan wali kelas yang dipilih adalah ID yang valid dari tabel dosens
         ], [
             'kelas.required' => 'Kolom Kelas tidak boleh kosong',
             'prodi.required' => 'Kolom Prodi tidak boleh kosong',
+            'semester.required' => 'Kolom Semester tidak boleh kosong',
             'wali_kelas.required' => 'Kolom Wali Kelas tidak boleh kosong',
             'wali_kelas.exists' => 'Wali kelas yang dipilih tidak valid',
         ]);
@@ -98,6 +104,7 @@ class KelasController extends Controller
         $kelas->update([
             'kelas' => $request->kelas, 
             'prodi' => $request->prodi,
+            'semester' => $request->semester,
             'wali_kelas' => $request->wali_kelas,
         ]);
 

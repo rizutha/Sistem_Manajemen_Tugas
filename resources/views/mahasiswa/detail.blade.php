@@ -21,9 +21,9 @@
                     <p class="card-text">Tanggal Lahir: {{ $mahasiswa->tgl_lahir }}</p>
                     <p class="card-text">Alamat: {{ $mahasiswa->alamat }}</p>
                     <p class="card-text">Kontak: {{ $mahasiswa->kontak }}</p>
-                    <p class="card-text">Email: {{ $mahasiswa->email }}</p>
-                    <p class="card-text">Program Studi: {{ $mahasiswa->prodi }}</p>
-                    <p class="card-text">Semester: {{ $mahasiswa->semester }}</p>
+                    <p class="card-text">Email: {{ $mahasiswa->user->email }}</p>
+                    <p class="card-text">Program Studi: {{ $mahasiswa->kelas->prodi }}</p>
+                    <p class="card-text">Kelas: {{ $mahasiswa->kelas->kelas }}</p>
                 </div>
             </div>
             <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary mt-3">Kembali</a>

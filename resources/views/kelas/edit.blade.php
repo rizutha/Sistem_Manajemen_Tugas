@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Dosen')
+@section('title', 'Kelas')
 
 @section('content')
     <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <div class="d-flex justify-content-between">
             <div class="">
-                <h2 class="text-dark m-0">Tambah Data Dosen</h2>
+                <h2 class="text-dark m-0">Edit Data Kelas</h2>
             </div>
         </div>
         <br>
@@ -40,13 +40,25 @@
                         @endif
                     </div>
                     <div class="row py-2">
-                        <label for="">Wali Kelas <span class="text-danger">*</span></label>
+                        <label for="">Semester <span class="text-danger">*</span></label>
+                        <input type="text" name="semester"
+                            class="form-control @if ($errors->has('semester')) is-invalid @endif"
+                            placeholder="Masukkan Semester" value="{{ $kelas->semester }}">
+                        @if ($errors->has('semester'))
+                            <small class="text-danger">
+                                {{ $errors->first('semester') }}
+                            </small>
+                        @endif
+                    </div>
+                    <div class="row py-2">
+                        <label for="wali_kelas">Wali Kelas <span class="text-danger">*</span></label>
                         <select name="wali_kelas" class="form-control @if ($errors->has('wali_kelas')) is-invalid @endif">
-                            <option value="">Pilih Wali Kelas</option>
+                            {{-- <option value="">Pilih Wali Kelas</option> --}}
                             @foreach($list_dosen as $dosen)
-                                <option value="{{ $dosen->id }}" @if(old('wali_kelas') == $dosen->id) selected @endif>{{ $dosen->nama }}</option>
+                                <option value="{{ $dosen->id }}" {{ $kelas->wali_kelas == $dosen->id ? 'selected' : '' }}>{{ $dosen->nama }}</option>
                             @endforeach
                         </select>
+
                         
                         @if ($errors->has('wali_kelas'))
                             <small class="text-danger">

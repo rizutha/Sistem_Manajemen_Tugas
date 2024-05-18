@@ -18,5 +18,27 @@ class Kelas extends Model
     {
         return $this->belongsTo(Dosen::class, 'wali_kelas');
     }
+    public function mahasiswa()
+    {
+        return $this->hasMany(Mahasiswa::class, 'id_kelas');
+    }
+    public function dosen()
+    {
+        return $this->belongsToMany(Dosen::class, 'wali_kelas', 'id_kelas', 'id_dosen');
+    }
+
+    public function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class, 'id_kelas');
+    }
+
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class, 'id_kelas');
+    }
+    public function mapels()
+    {
+        return $this->hasMany(Mapel::class, 'id_kelas');
+    }
 
 }

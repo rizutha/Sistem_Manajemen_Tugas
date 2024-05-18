@@ -56,34 +56,34 @@ class UserSeeder extends Seeder
                 'password'=>bcrypt('rifqi123'),
                 'role'=>'mahasiswa',
             ],
-            [
-                'name'=>'Jacob Jockey Saputra',
-                'username'=>'jacob',
-                'email'=>'jacob@gmail.com',
-                'password'=>bcrypt('jacob123'),
-                'role'=>'mahasiswa',
-            ],
-            [
-                'name'=>'Kulum Fatmawati',
-                'username'=>'kulum',
-                'email'=>'kulum@gmail.com',
-                'password'=>bcrypt('kulum123'),
-                'role'=>'mahasiswa',
-            ],
-            [
-                'name'=>'Khasnah Maesaroh',
-                'username'=>'khasnah',
-                'email'=>'khasnah@gmail.com',
-                'password'=>bcrypt('khasnah123'),
-                'role'=>'mahasiswa',
-            ],
-            [
-                'name'=>'Ivana Amanda Putri',
-                'username'=>'ivana',
-                'email'=>'ivana@gmail.com',
-                'password'=>bcrypt('ivana123'),
-                'role'=>'mahasiswa',
-            ]
+            // [
+            //     'name'=>'Jacob Jockey Saputra',
+            //     'username'=>'jacob',
+            //     'email'=>'jacob@gmail.com',
+            //     'password'=>bcrypt('jacob123'),
+            //     'role'=>'mahasiswa',
+            // ],
+            // [
+            //     'name'=>'Kulum Fatmawati',
+            //     'username'=>'kulum',
+            //     'email'=>'kulum@gmail.com',
+            //     'password'=>bcrypt('kulum123'),
+            //     'role'=>'mahasiswa',
+            // ],
+            // [
+            //     'name'=>'Khasnah Maesaroh',
+            //     'username'=>'khasnah',
+            //     'email'=>'khasnah@gmail.com',
+            //     'password'=>bcrypt('khasnah123'),
+            //     'role'=>'mahasiswa',
+            // ],
+            // [
+            //     'name'=>'Ivana Amanda Putri',
+            //     'username'=>'ivana',
+            //     'email'=>'ivana@gmail.com',
+            //     'password'=>bcrypt('ivana123'),
+            //     'role'=>'mahasiswa',
+            // ]
         ]);
 
     }

@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Dosen')
+@section('title', 'Kelas')
 
 @section('content')
     <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
         <div class="d-flex justify-content-between">
             <div class="">
-                <h2 class="text-dark m-0">Tambah Data Dosen</h2>
+                <h2 class="text-dark m-0">Tambah Data Kelas</h2>
             </div>
         </div>
         <br>
@@ -29,15 +29,39 @@
                     </div>
                     <div class="row py-2">
                         <label for="">Prodi <span class="text-danger">*</span></label>
-                        <input type="text" name="prodi"
-                            class="form-control @if ($errors->has('prodi')) is-invalid @endif"
-                            placeholder="Masukkan Prodi" value="{{ old('prodi') }}">
+                        <select name="prodi" class="form-control @if ($errors->has('prodi')) is-invalid @endif" required>
+                            <option value="">Pilih Prodi</option>
+                            <option value="Sistem Informasi" {{ old('prodi') == 'Sistem Informasi' ? 'selected' : '' }}>Sistem Informasi</option>
+                            <option value="Sistem Informasi Akuntansi" {{ old('prodi') == 'Sistem Informasi Akuntansi' ? 'selected' : '' }}>Sistem Informasi Akuntansi</option>
+                            <option value="Teknologi Informasi" {{ old('prodi') == 'Teknologi Informasi' ? 'selected' : '' }}>Teknologi Informasi</option>
+                        </select>
                         @if ($errors->has('prodi'))
                             <small class="text-danger">
                                 {{ $errors->first('prodi') }}
                             </small>
                         @endif
                     </div>
+                    <div class="row py-2">
+                        <label for="">Semester <span class="text-danger">*</span></label>
+                        <select name="semester" class="form-control @if ($errors->has('prodi')) is-invalid @endif" required>
+                            <option value="">Pilih Semester</option>
+                            <option value="1" {{ old('semester') == '1' ? 'selected' : '' }}>1</option>
+                            <option value="2" {{ old('semester') == '2' ? 'selected' : '' }}>2</option>
+                            <option value="3" {{ old('semester') == '3' ? 'selected' : '' }}>3</option>
+                            <option value="4" {{ old('semester') == '4' ? 'selected' : '' }}>4</option>
+                            <option value="5" {{ old('semester') == '5' ? 'selected' : '' }}>5</option>
+                            <option value="6" {{ old('semester') == '6' ? 'selected' : '' }}>6</option>
+                            <option value="7" {{ old('semester') == '7' ? 'selected' : '' }}>7</option>
+                            <option value="8" {{ old('semester') == '8' ? 'selected' : '' }}>8</option>
+                        </select>
+                        @if ($errors->has('semester'))
+                            <small class="text-danger">
+                                {{ $errors->first('semester') }}
+                            </small>
+                        @endif
+                    </div>
+                    
+
                     <div class="row py-2">
                         <label for="">Wali Kelas <span class="text-danger">*</span></label>
                         <select name="wali_kelas" class="form-control @if ($errors->has('wali_kelas')) is-invalid @endif">

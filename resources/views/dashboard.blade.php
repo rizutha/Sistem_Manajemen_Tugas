@@ -26,20 +26,23 @@
                     <div class="row d-flex justify-content-center">
                         <a href="/kelas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Data Kelas</a>
                     </div>
+                    <div class="row d-flex justify-content-center">
+                        <a href="/mapel" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Data Mata Kuliah</a>
+                    </div>
                 @break
-
                 @case('dosen')
                     <div class="row d-flex justify-content-center">
-                        <a href="/datamhs" class="btn btn-primary btn-lg" style="width: 300px">Lihat Data Mahasiswa</a>
+                        <a href="/dashboard" class="btn btn-primary btn-lg" style="width: 300px">Data Kelas</a>
                     </div>
                     <div class="row d-flex justify-content-center">
                         <a href="/tugas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
+                    
                 @break
 
                 @case('mahasiswa')
                     <div class="row d-flex justify-content-center">
-                        <a href="/tugasmhs" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
+                        <a href="/pengumpulan" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
                 @break
 
