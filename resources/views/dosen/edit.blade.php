@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="container">
             <h2>Edit Dosen</h2>
 
@@ -15,8 +15,9 @@
                         <div class="row py-2">
                             <label for="users_id">User</label>
                             <select name="users_id" class="form-control" required>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ $dosen->users_id == $user->id ? 'selected' : '' }}>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                        {{ $dosen->users_id == $user->id ? 'selected' : '' }}>
                                         {{ $user->name }} ({{ $user->email }})
                                     </option>
                                 @endforeach

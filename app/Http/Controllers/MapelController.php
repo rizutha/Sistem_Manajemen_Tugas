@@ -27,7 +27,6 @@ class MapelController extends Controller
         $request->validate([
             'id_kelas' => 'required',
             'dosen_pengajar' => 'required',
-            // 'prodi' => 'required',
             'nama_matkul' => 'required',
         ]);
 
@@ -38,9 +37,8 @@ class MapelController extends Controller
             'id_kelas' => $request->id_kelas,
             'dosen_pengajar' => $request->dosen_pengajar,
             'nama_matkul' => $request->nama_matkul,
-            'prodi' => $kelas->prodi,
         ]);
-    
+
         // Mapel::create($request->all());
 
         return redirect()->route('mapel.index')
@@ -59,7 +57,6 @@ class MapelController extends Controller
         $request->validate([
             'id_kelas' => 'required',
             'dosen_pengajar' => 'required',
-            'prodi' => 'required',
             'nama_matkul' => 'required',
         ]);
 

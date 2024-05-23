@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', function () {
     return view('login');
 });
@@ -58,7 +59,6 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
 
     Route::resource('kelas', KelasController::class);
     Route::resource('mapel', MapelController::class);
-
 });
 Route::group(['middleware' => 'checkRole:dosen'], function () {
 
@@ -69,7 +69,7 @@ Route::group(['middleware' => 'checkRole:dosen'], function () {
     Route::post('/tugas/{id}/update', [TugasController::class, 'update']);
     Route::delete('/tugas/{id}', [TugasController::class, 'destroy'])->name('tugas.destroy');
     Route::get('/profildsn', [DosenController::class, 'showProfil'])->name('profildsn');
-    Route::get('datamhs', [DosenController::class, 'showMahasiswa'])->name('datamhs');
+    Route::get('datakelas', [DosenController::class, 'showMahasiswa'])->name('datakelas');
     Route::get('/detailmhs/{id}', [DosenController::class, 'detail'])->name('detailmhs');
     Route::get('/tugas/pengumpulans', [PengumpulanController::class, 'indexdosen'])->name('pengumpulan.indexdosen');
     Route::get('/tugas/{id}/pengumpulanedit', [PengumpulanController::class, 'edit'])->name('pengumpulan.edit');
@@ -80,8 +80,6 @@ Route::group(['middleware' => 'checkRole:dosen'], function () {
     Route::patch('/pengumpulan/{id}/dosen-update', [PengumpulanController::class, 'dosenUpdate'])->name('pengumpulan.dosenUpdate');
     Route::get('/pengumpulan/tugas/{tugasId}', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
     Route::get('/tugas/{tugasId}/pengumpulans', [TugasController::class, 'indexdosen'])->name('tugas.pengumpulans');
-
-
 });
 
 Route::group(['middleware' => 'checkRole:mahasiswa'], function () {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="d-flex justify-content-between">
             <h2>Data Dosen</h2>
 
@@ -29,7 +29,7 @@
                         <td>{{ $row->keilmuan }}</td>
                         <td>
                             <a href="{{ route('dosen.show', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="{{ route('dosen.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('dosen.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <form action="{{ route('dosen.destroy', $row->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

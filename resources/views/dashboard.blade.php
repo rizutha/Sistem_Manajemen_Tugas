@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-                @notifyCss
-                <x-notify::notify />
-                @notifyJs
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    @notifyCss
+    <x-notify::notify />
+    @notifyJs
+    <div class="rounded-4 card mb-5 p-5">
         <div class="col text-center">
             <div class="row">
                 <h3>👋 Hai !, {{ Auth::user()->name }}</h3>
@@ -30,14 +30,14 @@
                         <a href="/mapel" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Data Mata Kuliah</a>
                     </div>
                 @break
+
                 @case('dosen')
                     <div class="row d-flex justify-content-center">
-                        <a href="/dashboard" class="btn btn-primary btn-lg" style="width: 300px">Data Kelas</a>
+                        <a href="/datakelas" class="btn btn-primary btn-lg" style="width: 300px">Data Kelas</a>
                     </div>
                     <div class="row d-flex justify-content-center">
                         <a href="/tugas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
-                    
                 @break
 
                 @case('mahasiswa')

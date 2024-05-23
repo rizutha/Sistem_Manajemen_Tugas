@@ -3,7 +3,7 @@
 @section('content')
     <!-- Sertakan Bootstrap CSS dan JS (gantilah dengan jalur file yang sesuai) -->
 
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="d-flex justify-content-between">
             <h2>Data Tugas</h2>
 

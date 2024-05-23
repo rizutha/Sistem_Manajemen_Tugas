@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="d-flex justify-content-between">
             <h2>Data Mata Kuliah</h2>
 
@@ -35,10 +35,12 @@
                             <td>{{ $mapel->dosen->nama }}</td>
                             <td>
                                 <a href="{{ route('mapel.edit', $mapel->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form action="{{ route('mapel.destroy', $mapel->id) }}" method="POST" style="display: inline-block;">
+                                <form action="{{ route('mapel.destroy', $mapel->id) }}" method="POST"
+                                    style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus mapel ini?')">Hapus</button>
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus mapel ini?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>

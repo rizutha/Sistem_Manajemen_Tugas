@@ -2,7 +2,7 @@
 @section('title', 'Dosen')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="d-flex justify-content-between">
             <div class="">
                 <h2 class="text-dark m-0">Tambah Data Dosen</h2>
@@ -19,7 +19,7 @@
                     <div class="row py-2">
                         <label for="users_id">Nama <span class="text-danger">*</span></label>
                         <select name="users_id" class="form-control" required>
-                            @foreach($users as $user)
+                            @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }} </option>
                             @endforeach
                         </select>

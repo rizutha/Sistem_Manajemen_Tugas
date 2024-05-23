@@ -1,9 +1,7 @@
-
-
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="d-flex justify-content-between">
             <h2>Data Mahasiswa</h2>
             <div class="mb-3">
@@ -36,12 +34,16 @@
                             <td>{{ $mahasiswa->kelas->kelas }}</td>
                             <td>{{ $mahasiswa->kelas->prodi }}</td>
                             <td>
-                                <a href="{{ route('mahasiswa.detail', $mahasiswa->id) }}" class="btn btn-info btn-sm">Detail</a>
-                                <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('mahasiswa.detail', $mahasiswa->id) }}"
+                                    class="btn btn-info btn-sm">Detail</a>
+                                <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"
+                                    class="btn btn-sm btn-primary">Edit</a>
+                                <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST"
+                                    style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?')">Hapus</button>
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -52,4 +54,3 @@
         @endif
     </div>
 @endsection
-

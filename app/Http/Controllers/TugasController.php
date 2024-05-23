@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Tugas;
@@ -38,7 +39,7 @@ class TugasController extends Controller
 
     //     $mapel = Mapel::findOrFail($request->id_mapel);
     //     $kelas = $mapel->kelas;
-        
+
     //     $tugas = new Tugas([
     //         'id_dosens' => Auth::user()->dosen->id,
     //         'id_kelas' => $kelas->id,
@@ -80,8 +81,8 @@ class TugasController extends Controller
     public function index()
     {
         $dosen = Auth::user()->dosen;
-        $tugass = Tugas::where('id_dosens', $dosen->id)->with(['kelas', 'mapel'])->get();
-        return view('tugas.index', compact('tugass'));
+        $tugasPerKelas = Tugas::where('id_dosens', $dosen->id)->with(['kelas', 'mapel'])->get()->groupBy('id_kelas');
+        return view('tugas.index', compact('tugasPerKelas'));
     }
 
     public function create()

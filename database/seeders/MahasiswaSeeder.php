@@ -20,7 +20,7 @@ class MahasiswaSeeder extends Seeder
             'alamat' => 'Brebes',
             'tgl_lahir' => '2002-10-12',
             'kontak' => '089121212121',
-            'email' => 'rifqi@gmail.com',
+            'email' => 'arifqiza@gmail.com',
             'foto' => 'images/rifqi.png',
             'id_kelas' => 1, // Ganti dengan id kelas yang valid
         ]);
