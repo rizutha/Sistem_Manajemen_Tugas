@@ -22,11 +22,11 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>NIM</th>
-                                    <th>Nama Mahasiswa</th>
-                                    <th>Kelas</th>
-                                    <th>Aksi</th>
+                                    <th width="25px">No</th>
+                                    <th width="100px">NIM</th>
+                                    <th width="250px">Nama Mahasiswa</th>
+                                    <th width="100px">Kelas</th>
+                                    <th width="100px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

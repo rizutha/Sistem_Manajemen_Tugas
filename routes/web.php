@@ -83,7 +83,7 @@ Route::group(['middleware' => 'checkRole:dosen'], function () {
 });
 
 Route::group(['middleware' => 'checkRole:mahasiswa'], function () {
-    Route::get('/pengumpulan', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
+    Route::get('/tugas', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
     Route::get('/pengumpulan/create', [PengumpulanController::class, 'create'])->name('pengumpulan.create');
     Route::post('/pengumpulan/store', [PengumpulanController::class, 'store'])->name('pengumpulan.store');
     Route::get('/pengumpulan/{id}/edit', [PengumpulanController::class, 'edit'])->name('pengumpulan.edit');

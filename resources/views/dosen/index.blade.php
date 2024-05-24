@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <h2>Data Dosen</h2>
 
@@ -13,10 +13,10 @@
         <table class="table-hover table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Dosen Matkul</th>
+                    <th width="50px">No</th>
+                    <th width="125px">NIP</th>
+                    <th width="300px">Nama</th>
+                    <th width="250px">Dosen Matkul</th>
                     <th>Aksi</th>
                 </tr>
             </thead>

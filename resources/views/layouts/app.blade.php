@@ -132,7 +132,7 @@
                             @case('mahasiswa')
                                 <!-- Tugas Nav Item -->
                                 <li class="sidebar-item {{ strpos(request()->url(), 'tugasmhs') !== false ? 'active' : '' }}">
-                                    <a href="/tugasmhs" class='sidebar-link'>
+                                    <a href="/tugas" class='sidebar-link'>
                                         <i class="bi bi-journal"></i>
                                         <span>Data Tugas</span>
                                     </a>
@@ -148,7 +148,7 @@
         </div>
 
         <div id="main">
-            <header class="mb-3">
+            <header class="mb-1">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
@@ -171,26 +171,26 @@
                         <ul class="dropdown-menu rounded-4 p-2 shadow-lg">
                             @switch(auth()->user()->role)
                                 @case('admin')
-                                    <li><a class="dropdown-item rounded-3" href="/profilmhs">Profil</a></li>
-                                    <li><a class="dropdown-item rounded-3" onclick="confirmLogout()">Logout
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        </a>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            href="/profilmhs">Profil<i class="bi bi-person"></i></a></li>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
                                 @break
 
                                 @case('dosen')
-                                    <li><a class="dropdown-item" href="/profilmhs">Profil</a></li>
-                                    <li><a class="dropdown-item" onclick="confirmLogout()">Logout
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        </a>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            href="/profildsn">Profil<i class="bi bi-person"></i></a></li>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
                                 @break
 
                                 @case('mahasiswa')
-                                    <li><a class="dropdown-item" href="/profilmhs">Profil</a></li>
-                                    <li><a class="dropdown-item" onclick="confirmLogout()">Logout
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        </a>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            href="/profilmhs">Profil<i class="bi bi-person"></i></a></li>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
                                 @break
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="container">
                 <h1>Daftar Tugas</h1>
@@ -10,8 +10,9 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Tugas</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Dikumpulkan Pada</th>
                             <th scope="col">Link Tugas</th>
-                            <th scope="col">Tgl Pengumpulan</th>
                             <th scope="col">Nilai</th>
                             <th scope="col">Komentar</th>
                             <th scope="col">Aksi</th>
@@ -22,6 +23,8 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td>{{ $pengumpulan->tugas->matkul }}</td>
+                                <td>{{ $pengumpulan->tugas->tgl_dl }}</td>
+                                <td>{{ $pengumpulan->tgl_pengumpulan }}</td>
                                 <td>
                                     @if ($pengumpulan->link_tugas)
                                         <a href="{{ $pengumpulan->link_tugas }}"
@@ -35,7 +38,6 @@
                                         </form>
                                     @endif
                                 </td>
-                                <td>{{ $pengumpulan->tgl_pengumpulan }}</td>
                                 <td>{{ $pengumpulan->nilai }}</td>
                                 <td>{{ $pengumpulan->komentar }}</td>
                                 <td>

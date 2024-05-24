@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <h2>Data Mahasiswa</h2>
-            <div class="mb-3">
-                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">Tambah Mahasiswa</a>
+            <div class="mb-2">
+                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-2">Tambah Mahasiswa</a>
             </div>
         </div>
 
@@ -15,30 +15,28 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>NIM</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Kelas</th>
-                        <th>Prodi</th>
+                        <th width="50px">No</th>
+                        <th width="125px">NIM</th>
+                        <th width="250px">Nama</th>
+                        <th width="100px">Alamat</th>
+                        <th width="125px">Kelas</th>
+                        <th width="250px">Prodi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mahasiswas as $mahasiswa)
+                    @foreach ($mahasiswas as $mahasiswa => $row)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $mahasiswa->nim }}</td>
-                            <td>{{ $mahasiswa->nama }}</td>
-                            <td>{{ $mahasiswa->alamat }}</td>
-                            <td>{{ $mahasiswa->kelas->kelas }}</td>
-                            <td>{{ $mahasiswa->kelas->prodi }}</td>
+                            <td>{{ $mahasiswas->firstItem() + $mahasiswa }}</td>
+                            <td>{{ $row->nim }}</td>
+                            <td>{{ $row->nama }}</td>
+                            <td>{{ $row->alamat }}</td>
+                            <td>{{ $row->kelas->kelas }}</td>
+                            <td>{{ $row->kelas->prodi }}</td>
                             <td>
-                                <a href="{{ route('mahasiswa.detail', $mahasiswa->id) }}"
-                                    class="btn btn-info btn-sm">Detail</a>
-                                <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"
-                                    class="btn btn-sm btn-primary">Edit</a>
-                                <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST"
+                                <a href="{{ route('mahasiswa.detail', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                <a href="{{ route('mahasiswa.edit', $row->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <form action="{{ route('mahasiswa.destroy', $row->id) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')

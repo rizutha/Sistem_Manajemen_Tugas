@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="container">
                 <div class="d-flex justify-content-between">
@@ -31,13 +31,13 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Pertemuan</th>
-                                    <th>Tanggal Buat</th>
-                                    <th>Tanggal Deadline</th>
-                                    <th>File Tugas</th>
-                                    <th>Aksi</th>
+                                    <th width="5px">No</th>
+                                    <th width="125px">Mata Pelajaran</th>
+                                    <th width="1px">Pertemuan</th>
+                                    <th width="90px">Dibuat Pada</th>
+                                    <th width="90px">Deadline</th>
+                                    <th width="50px">File Tugas</th>
+                                    <th width="200px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

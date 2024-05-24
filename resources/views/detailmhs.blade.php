@@ -4,9 +4,8 @@
 
 @section('content')
     <div class="rounded-4 card mb-5 p-5">
-        <div class="bg-light rounded-2 container p-5 shadow-lg">
+        <div class="">
             <h2>Detail Mahasiswa</h2>
-
             <div class="row">
                 @if ($mahasiswa->foto)
                     <img src="{{ asset('storage/mahasiswa/' . $mahasiswa->foto) }}" style="width:250px"
@@ -26,6 +25,6 @@
                     <p class="card-text">Kelas: {{ $mahasiswa->kelas->kelas }}</p>
                 </div>
             </div>
-            <a href="{{ route('datamhs') }}" class="btn btn-secondary mt-3">Kembali</a>
+            <a href="{{ route('datakelas') }}" class="btn btn-secondary mt-3">Kembali</a>
         </div>
     @endsection

@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
+<head>
+    <div class="z-3 position-absolute">
+        @notifyCss
+        <x-notify::notify />
+        @notifyJs
+    </div>
+</head>
+
+
 @section('content')
-    @notifyCss
-    <x-notify::notify />
-    @notifyJs
     <div class="rounded-4 card mb-5 p-5">
         <div class="col text-center">
             <div class="row">
-                <h3>👋 Hai !, {{ Auth::user()->name }}</h3>
+                <h3>👋 Hai, {{ Auth::user()->name }}!</h3>
             </div>
             <div class="row mb-4">
                 <span>Apa yang ingin anda lakukan hari ini?</span>
@@ -42,7 +48,7 @@
 
                 @case('mahasiswa')
                     <div class="row d-flex justify-content-center">
-                        <a href="/pengumpulan" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
+                        <a href="/tugas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
                 @break
 

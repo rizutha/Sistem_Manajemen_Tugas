@@ -27,21 +27,18 @@
                                 <td><a href="{{ $pengumpulan->link_tugas }}"
                                         target="_blank">{{ $pengumpulan->link_tugas }}</a></td>
                                 <td>{{ $pengumpulan->tgl_pengumpulan }}</td>
-                                <td>{{ $pengumpulan->nilai }}</td>
-                                <td>{{ $pengumpulan->komentar }}</td>
                                 <td>
-                                    <form action="{{ route('pengumpulan.dosenUpdate', $pengumpulan->id) }}" method="POST">
+                                    <input type="number" name="nilai" id="nilai-{{ $pengumpulan->id }}" class="form-control"
+                                        value="{{ $pengumpulan->nilai }}" form="form-{{ $pengumpulan->id }}">
+                                </td>
+                                <td>
+                                    <textarea name="komentar" id="komentar-{{ $pengumpulan->id }}" class="form-control" form="form-{{ $pengumpulan->id }}">{{ $pengumpulan->komentar }}</textarea>
+                                </td>
+                                <td>
+                                    <form id="form-{{ $pengumpulan->id }}"
+                                        action="{{ route('pengumpulan.dosenUpdate', $pengumpulan->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <div class="form-group">
-                                            <label for="nilai-{{ $pengumpulan->id }}">Nilai</label>
-                                            <input type="number" name="nilai" id="nilai-{{ $pengumpulan->id }}"
-                                                class="form-control" value="{{ $pengumpulan->nilai }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="komentar-{{ $pengumpulan->id }}">Komentar</label>
-                                            <textarea name="komentar" id="komentar-{{ $pengumpulan->id }}" class="form-control">{{ $pengumpulan->komentar }}</textarea>
-                                        </div>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </form>
                                 </td>
