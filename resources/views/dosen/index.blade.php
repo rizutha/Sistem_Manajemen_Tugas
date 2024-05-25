@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Data Dosen</h2>
+            <h4>Data Dosen</h4>
 
             <div class="mb-3">
                 <a href="{{ route('dosen.create') }}" class="btn btn-primary">Tambah Dosen</a>
@@ -13,23 +13,23 @@
         <table class="table-hover table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Dosen Matkul</th>
+                    <th width="50px">No</th>
+                    <th width="125px">NIP</th>
+                    <th width="300px">Nama</th>
+                    <th width="250px">Dosen Matkul</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($queries as $dosen => $row)
+                @foreach ($dosens as $dosen => $row)
                     <tr>
-                        <td>{{ $queries->firstItem() + $dosen }}</td>
+                        <td>{{ $dosens->firstItem() + $dosen }}</td>
                         <td>{{ $row->nip }}</td>
                         <td>{{ $row->nama }}</td>
                         <td>{{ $row->keilmuan }}</td>
                         <td>
                             <a href="{{ route('dosen.show', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="{{ route('dosen.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('dosen.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <form action="{{ route('dosen.destroy', $row->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -41,6 +41,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $queries->links() }}
+        {{ $dosens->links() }}
     </div>
 @endsection

@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
+<head>
+    <div class="z-3 position-absolute">
+        @notifyCss
+        <x-notify::notify />
+        @notifyJs
+    </div>
+</head>
+
+
 @section('content')
-                @notifyCss
-                <x-notify::notify />
-                @notifyJs
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 p-5">
         <div class="col text-center">
             <div class="row">
-                <h3>👋 Hai !, {{ Auth::user()->name }}</h3>
+                <h3>👋 Hai, {{ Auth::user()->name }}!</h3>
             </div>
             <div class="row mb-4">
                 <span>Apa yang ingin anda lakukan hari ini?</span>
@@ -26,20 +32,23 @@
                     <div class="row d-flex justify-content-center">
                         <a href="/kelas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Data Kelas</a>
                     </div>
+                    <div class="row d-flex justify-content-center">
+                        <a href="/mapel" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Data Mata Kuliah</a>
+                    </div>
                 @break
 
                 @case('dosen')
                     <div class="row d-flex justify-content-center">
-                        <a href="/datamhs" class="btn btn-primary btn-lg" style="width: 300px">Lihat Data Mahasiswa</a>
+                        <a href="/datakelas" class="btn btn-primary btn-lg" style="width: 300px">Data Kelas</a>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <a href="/tugas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
+                        <a href="/tugaskelas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
                 @break
 
                 @case('mahasiswa')
                     <div class="row d-flex justify-content-center">
-                        <a href="/tugasmhs" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
+                        <a href="/datatugas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
                     </div>
                 @break
 

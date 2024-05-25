@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="container">
-            <h2>Edit Mahasiswa</h2>
+            <h4>Edit Mahasiswa</h4>
 
             <form action="{{ route('mahasiswa.update', $mahasiswa->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -11,16 +11,6 @@
                 <p><b>Kolom bertanda <span class="text-danger">*</span> tidak boleh kosong</b></p>
                 <div class="row">
                     <div class="col px-4">
-                        <div class="row py-2">
-                            <label for="nim">NIM <span class="text-danger">*</span></label>
-                            <input type="text" name="nim" class="form-control @error('nim') is-invalid @enderror"
-                                placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}">
-                            @error('nim')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
                         <div class="row py-2">
                             <label for="nama">Nama <span class="text-danger">*</span></label>
                             <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
@@ -63,36 +53,19 @@
                             @enderror
                         </div>
                         <div class="row py-2">
-                            <label for="email">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="Masukkan Email" value="{{ $mahasiswa->email }}">
-                            @error('email')
+                            <label for="id_kelas">Kelas <span class="text-danger">*</span></label>
+                            <select name="id_kelas" class="form-control @error('id_kelas') is-invalid @enderror">
+                                @foreach ($kelas as $kelas)
+                                    <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_kelas')
                                 <small class="text-danger">
                                     {{ $message }}
                                 </small>
                             @enderror
                         </div>
-                        <div class="row py-2">
-                            <label for="prodi">Program Studi <span class="text-danger">*</span></label>
-                            <input type="text" name="prodi" class="form-control @error('prodi') is-invalid @enderror"
-                                placeholder="Masukkan Program Studi" value="{{ $mahasiswa->prodi }}">
-                            @error('prodi')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
-                            <label for="semester">Semester <span class="text-danger">*</span></label>
-                            <input type="text" name="semester"
-                                class="form-control @error('semester') is-invalid @enderror" placeholder="Masukkan Semester"
-                                value="{{ $mahasiswa->semester }}">
-                            @error('semester')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
+
                     </div>
                     <div class="col px-5">
                         <div class="row py-2">

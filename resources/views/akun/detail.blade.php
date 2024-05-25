@@ -3,8 +3,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
-        <h2>Detail Pengguna</h2>
+    <div class="rounded-4 card mb-5 px-5 py-4">
+        <h4>Detail Pengguna</h4>
 
         <div class="row">
             {{-- Informasi Dasar --}}

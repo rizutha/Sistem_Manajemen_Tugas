@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="row justify-content-center">
-            <h1>Tambah Pengguna</h1>
+            <h4>Tambah Pengguna</h4>
             <p><b>Kolom bertanda <span class="text-danger">*</span> tidak boleh kosong</b></p>
 
             <div class="">

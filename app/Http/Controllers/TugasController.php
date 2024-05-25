@@ -2,199 +2,248 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dosen;
-use App\Models\Mahasiswa;
 use App\Models\Tugas;
+use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use PDF;
 
 class TugasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // public function index()
+    // {
+    //     $tugass = Tugas::with(['kelas', 'dosen', 'mapel'])->get();
+    //     return view('tugas.index', compact('tugass'));
+    // }
+
+    // public function create()
+    // {
+    //     $dosen = Auth::user()->dosen;
+    //     $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
+    //     $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
+    //     return view('tugas.create', compact('kelas', 'mapels', 'dosen'));
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'id_mapel' => 'required|exists:mapels,id',
+    //         'semester' => 'required',
+    //         'pertemuan' => 'required',
+    //         'tgl_buat' => 'required|date',
+    //         'tgl_dl' => 'required|date',
+    //         'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
+    //     ]);
+
+    //     $mapel = Mapel::findOrFail($request->id_mapel);
+    //     $kelas = $mapel->kelas;
+
+    //     $tugas = new Tugas([
+    //         'id_dosens' => Auth::user()->dosen->id,
+    //         'id_kelas' => $kelas->id,
+    //         'id_mapel' => $mapel->id,
+    //         'matkul' => Mapel::find($request->id_mapel)->nama_matkul,
+    //         'semester' => $request->semester,
+    //         'pertemuan' => $request->pertemuan,
+    //         'tgl_buat' => $request->tgl_buat,
+    //         'tgl_dl' => $request->tgl_dl,
+    //     ]);
+
+    //     if ($request->hasFile('file_tugas')) {
+    //         $file = $request->file('file_tugas');
+    //         $filename = time() . '.' . $file->getClientOriginalExtension();
+    //         $file->storeAs('public/tugas', $filename);
+    //         $tugas->file_tugas = $filename;
+    //     }
+
+    //     $tugas->save();
+    //     $kelas = Kelas::find($tugas->id_kelas);
+    //     // Mengambil mahasiswa dari kelas
+    //     $mahasiswas = $kelas->mahasiswas;
+
+    //     // Menyimpan tugas di tabel pengumpulan untuk setiap mahasiswa
+    //     foreach ($mahasiswas as $mahasiswa) {
+    //         Pengumpulan::create([
+    //             'id_tugass' => $tugas->id,
+    //             'id_mahasiswas' => $mahasiswa->id,
+    //             'link_tugas' => null,
+    //             'tgl_pengumpulan' => null,
+    //             'nilai' => null,
+    //             'komentar' => null,
+    //         ]);
+    //     }
+
+    //     return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dibuat.');
+    // }
+
     public function index()
     {
-        $query = Tugas::orderBy('id', 'asc')->paginate(5);
-        return view('tugas.index', ['queries' => $query]);
+        $dosen = Auth::user()->dosen;
+        $tugasPerKelas = Tugas::where('id_dosens', $dosen->id)->with(['kelas', 'mapel'])->get()->groupBy('id_kelas');
+        return view('tugas.index', compact('tugasPerKelas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('tugas.create');
+        $dosen = Auth::user()->dosen;
+        $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
+        $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
+        return view('tugas.create', compact('kelas', 'mapels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // dd($request->file('file_tugas')->getMimeType());
-
         $request->validate([
-            'matkul' => 'required',
-            'semester' => 'required',
+            'id_mapel' => 'required|exists:mapels,id',
             'pertemuan' => 'required',
-            'tgl_buat' => 'required',
-            'tgl_dl' => 'required',
-            'file_tugas' => 'required|mimes:pdf|max:10000',
+            'tgl_buat' => 'required|date',
+            'tgl_dl' => 'required|date',
+            'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
+        ]);
 
-        ], [
-            'matkul.required' => 'Kolom Mata Kuliah tidak boleh kosong',
-            'semester.required' => 'Kolom Semester tidak boleh kosong',
-            'pertemuan.required' => 'Kolom Pertemuan tidak boleh kosong',
-            'tgl_buat.required' => 'Kolom Tanggal Pembuatan tidak boleh kosong',
-            'tgl_dl.required' => 'Kolom Tanggal Deadline tidak boleh kosong',
-            'file_tugas.required' => 'Silahkan Pilih File Tugas',
-            'file_tugas.mimes' => 'Tipe File harus PDF',
-            'file_tugas.max' => 'Ukuran file tidak boleh dari 10 MB',
+        $mapel = Mapel::findOrFail($request->id_mapel);
+        $kelas = $mapel->kelas; // Pastikan mapel memiliki relasi dengan kelas
+
+        if (!$kelas) {
+            return redirect()->back()->with('error', 'Kelas tidak ditemukan untuk mapel tersebut.');
+        }
+
+        $tugas = new Tugas([
+            'id_dosens' => Auth::user()->dosen->id,
+            'id_kelas' => $kelas->id,
+            'id_mapel' => $mapel->id,
+            'matkul' => $mapel->nama_matkul,
+            'pertemuan' => $request->pertemuan,
+            'tgl_buat' => $request->tgl_buat,
+            'tgl_dl' => $request->tgl_dl,
         ]);
 
         if ($request->hasFile('file_tugas')) {
-            try {
-                // Simpan file
-                $fileTugas = $request->file('file_tugas');
-                $newName = 'FT' . date('Ymd') . '.' . rand() . '.' . $fileTugas->getClientOriginalExtension();
-
-                // Simpan ke penyimpanan yang diinginkan (misal: storage/public/filetugas/)
-                $fileTugas->storeAs('public/filetugas/', $newName);
-
-                // Dapatkan ID Dosen berdasarkan user yang sedang login
-                $users_id = auth()->user()->id;
-                $id_dosens = Dosen::where('users_id', $users_id)->first();
-                $id = $id_dosens->id;
-
-                // Simpan data tugas
-                Tugas::create([
-                    'id_dosens' => $id,
-                    'matkul' => $request->matkul,
-                    'semester' => $request->semester,
-                    'pertemuan' => $request->pertemuan,
-                    'tgl_buat' => $request->tgl_buat,
-                    'tgl_dl' => $request->tgl_dl,
-                    'file_tugas' => $newName,
-                ]);
-
-                return redirect()
-                    ->route('tugas.index')
-                    ->with('success', 'Data Tugas sudah berhasil disimpan');
-            } catch (\Exception $e) {
-                // Tangani kesalahan saat menyimpan file
-                return redirect()
-                    ->route('tugas.create')
-                    ->withErrors(['file_tugas' => 'Gagal menyimpan file. Pastikan tipe file adalah PDF dan ukurannya tidak melebihi 10 MB.'])
-                    ->withInput();
-            }
-        } else {
-            return redirect()
-                ->back()
-                ->withErrors(['file_tugas' => 'File Tugas tidak ditemukan.']);
+            $file = $request->file('file_tugas');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/tugas', $filename);
+            $tugas->file_tugas = $filename;
         }
+
+        $tugas->save();
+
+        // Ambil mahasiswa dari kelas yang diambil dari mapel
+        foreach ($kelas->mahasiswas as $mahasiswa) {
+            Pengumpulan::create([
+                'id_tugass' => $tugas->id,
+                'id_mahasiswas' => $mahasiswa->id,
+                'link_tugas' => null,
+                'tgl_pengumpulan' => null,
+                'nilai' => null,
+                'komentar' => null,
+            ]);
+        }
+
+        return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dibuat.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $tugas = Tugas::findOrFail($id);
-        return view('tugas.edit', compact('tugas'));
+        $dosen = Auth::user()->dosen;
+        $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
+        $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
+        return view('tugas.edit', compact('tugas', 'kelas', 'mapels', 'dosen'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        $tugas = Tugas::find($id);
         $request->validate([
-            'matkul' => 'required',
-            'semester' => 'required',
+            'id_mapel' => 'required',
             'pertemuan' => 'required',
-            'tgl_buat' => 'required',
-            'tgl_dl' => 'required',
-            'file_tugas' => 'mimes:pdf|max:10000',
-        ],
-        [
-            'matkul.required' => 'Kolom Mata Kuliah tidak boleh kosong',
-            'semester.required' => 'Kolom Semester tidak boleh kosong',
-            'pertemuan.required' => 'Kolom Pertemuan tidak boleh kosong',
-            'tgl_buat.required' => 'Kolom Tanggal Pembuatan tidak boleh kosong',
-            'tgl_dl.required' => 'Kolom Tanggal Deadline tidak boleh kosong',
-            'file_tugas.mimes' => 'Tipe File harus PDF',
-            'file_tugas.max' => 'Ukuran file tidak boleh dari 10 MB',
+            'tgl_buat' => 'required|date',
+            'tgl_dl' => 'required|date',
+            'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
         ]);
 
-        // Upload foto jika ada
+        $tugas = Tugas::findOrFail($id);
+
+        $filename = $tugas->file_tugas;
         if ($request->hasFile('file_tugas')) {
-            Storage::delete('storage/filetugas/' . $tugas->file_tugas);
-            $file_tugas = $request->file('file_tugas');
-            $filename = 'FT' . date('Ymd') . rand() . '.' . $file_tugas->getClientOriginalExtension();
-            $file_tugas->storeAs('public/filetugas/' . $filename);
-            $oldFilePath = 'storage/filetugas/' . $tugas->file_tugas;
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
+            if ($filename) {
+                Storage::delete('public/tugas/' . $filename);
             }
-
-
-        // Perbarui data
-            $tugas->update([
-                'matkul' => $request->matkul,
-                'semester' => $request->semester,
-                'pertemuan' => $request->pertemuan,
-                'tgl_buat' => $request->tgl_buat,
-                'tgl_dl' => $request->tgl_dl,
-                'file_tugas' => $filename,
-            ]);
-        } else {
-            $id->update([
-                'matkul' => $request->matkul,
-                'semester' => $request->semester,
-                'pertemuan' => $request->pertemuan,
-                'tgl_buat' => $request->tgl_buat,
-                'tgl_dl' => $request->tgl_dl,
-            ]);
+            $file = $request->file('file_tugas');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/tugas', $filename);
         }
 
-        return redirect()
-            ->route('tugas.index')
-            ->with('success', 'Data Tugas Berhasil diUpdate');
+        $tugas->update([
+            'id_mapel' => $request->id_mapel,
+            'matkul' => Mapel::find($request->id_mapel)->nama_matkul,
+            'pertemuan' => $request->pertemuan,
+            'tgl_buat' => $request->tgl_buat,
+            'tgl_dl' => $request->tgl_dl,
+            'file_tugas' => $filename,
+        ]);
+
+        return redirect()->route('tugas.index')->with('success', 'Tugas berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $tugas = Tugas::findOrFail($id);
-
-        $pengumpulan = Pengumpulan::where('id_tugass', $id)->delete();
-
+        if ($tugas->file_tugas) {
+            Storage::delete('public/tugas/' . $tugas->file_tugas);
+        }
         $tugas->delete();
-        Storage::delete('public/filetugas/' . $tugas->file_tugas);
-        return redirect()
-            ->route('tugas.index')
-            ->with('success', 'Data Tugas berhasil dihapus');
+
+        return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dihapus.');
     }
-    public function detail()
+
+    // Fungsi untuk melihat daftar tugas bagi mahasiswa yang login
+    public function tugasMahasiswa()
     {
-        $query = Tugas::orderBy('id', 'asc')->paginate(5);
-        return view('tugasmhs', ['queries' => $query]);
-        $isMahasiswa = auth()->user()->role == 'mahasiswa';
+        // Mendapatkan mahasiswa yang sedang login
+        $mahasiswa = Auth::user()->mahasiswa;
 
+        // Mengambil tugas berdasarkan kelas yang diambil oleh mahasiswa
+        $tugass = Tugas::where('id_kelas', $mahasiswa->id_kelas)->get();
+
+        return view('mahasiswa.tugas.index', compact('tugass'));
     }
 
-    public function exportpdf()
+    // Fungsi untuk melihat form pengumpulan tugas
+    public function showTugas(Tugas $tugas)
     {
-        $query = Tugas::all();
-
-        $pdf = PDF::loadView('tugas.tugas_pdf', ['query' => $query]);
-        return $pdf->download('file-tugas.pdf');
+        return view('mahasiswa.tugas.show', compact('tugas'));
     }
 
+    // Fungsi untuk mengumpulkan tugas
+    public function submitTugas(Request $request, Tugas $tugas)
+    {
+        $request->validate([
+            'link_tugas' => 'required|url',
+        ]);
+
+        $mahasiswa = Auth::user()->mahasiswa;
+
+        $tugas->mahasiswa()->attach($mahasiswa->id, [
+            'link_tugas' => $request->link_tugas,
+            'tgl_pengumpulan' => now(),
+        ]);
+
+        return redirect()->route('mahasiswa.tugas.index')
+            ->with('success', 'Tugas berhasil dikumpulkan.');
+    }
+    public function datatugas($tugasId)
+    {
+        $pengumpulans = Pengumpulan::where('id_tugass', $tugasId)->get();
+        $tugas = Tugas::findOrFail($tugasId);
+        return view('pengumpulan.index', compact('pengumpulans', 'tugas'));
+    }
+    public function indexdosen($tugasId)
+    {
+        $dosen = Auth::user()->dosen;
+        $pengumpulans = Pengumpulan::where('id_tugass', $tugasId)->with('mahasiswa')->get();
+        $tugas = Tugas::findOrFail($tugasId);
+        return view('tugas.pengumpulans', compact('pengumpulans', 'tugas'));
+    }
 }

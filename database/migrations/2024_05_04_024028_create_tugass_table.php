@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kelas');
             $table->unsignedBigInteger('id_mapel');
             $table->string('matkul');
-            $table->string('semester');
             $table->string('pertemuan');
             $table->date('tgl_buat');
             $table->date('tgl_dl');

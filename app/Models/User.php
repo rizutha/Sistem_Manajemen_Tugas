@@ -28,8 +28,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mahasiswa::class, 'users_id'); // Sesuaikan dengan nama kolom yang digunakan
     }
-
-
     /**
      * The attributes that should be hidden for serialization.
      *

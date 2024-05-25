@@ -18,10 +18,22 @@ class Tugas extends Model
     }
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswas');
+        return $this->belongsTo(Mahasiswa::class, 'pengumpulans', 'id_tugass', 'id_mahasiswas');
     }
     public function pengumpulan()
     {
         return $this->hasMany(Pengumpulan::class, 'tugas_id');
+    }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
+    }
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class, 'id_mapel');
+    }
+    public function pengumpulans()
+    {
+        return $this->hasMany(Pengumpulan::class, 'id_tugass');
     }
 }

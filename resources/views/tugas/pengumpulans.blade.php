@@ -1,38 +1,50 @@
-<!-- Pada file index_dosen.blade.php -->
+<!-- resources/views/tugas/pengumpulans.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
-    <h2>Data Pengumpulan Dosen</h2>
-
-    <table class="table-hover table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Mahasiswa</th>
-                {{-- <th>Matakuliah</th> --}}
-                <th>Tanggal Pengumpulan</th>
-                <th>Link Tugas</th>
-                <th>Nilai</th>
-                <th>Komentar</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pengumpulans as $pengumpulan)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengumpulan->mahasiswa->nama }}</td>
-                    {{-- <td>{{ $pengumpulan->tugas->matkul }}</td> --}}
-                    <td>{{ $pengumpulan->tgl_pengumpulan }}</td>
-                    <td>{{ $pengumpulan->link_tugas }}</td>
-                    <td>{{ $pengumpulan->nilai }}</td>
-                    <td>{{ $pengumpulan->komentar }}</td>
-                    <td>
-                        <a href="{{ route('pengumpulan.edit', $pengumpulan->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>  
-@endsection
+    <div class="rounded-4 card mb-5 px-5 py-4">
+        <div class="d-flex justify-content-between">
+            <div class="container">
+                <h1>Pengumpulan Tugas: {{ $tugas->matkul }}</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Link Tugas</th>
+                            <th>Tgl Pengumpulan</th>
+                            <th>Nilai</th>
+                            <th>Komentar</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pengumpulans as $index => $pengumpulan)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $pengumpulan->mahasiswa->nama }}</td>
+                                <td><a href="{{ $pengumpulan->link_tugas }}"
+                                        target="_blank">{{ $pengumpulan->link_tugas }}</a></td>
+                                <td>{{ $pengumpulan->tgl_pengumpulan }}</td>
+                                <td>
+                                    <input type="number" name="nilai" id="nilai-{{ $pengumpulan->id }}" class="form-control"
+                                        value="{{ $pengumpulan->nilai }}" form="form-{{ $pengumpulan->id }}">
+                                </td>
+                                <td>
+                                    <textarea name="komentar" id="komentar-{{ $pengumpulan->id }}" class="form-control" form="form-{{ $pengumpulan->id }}">{{ $pengumpulan->komentar }}</textarea>
+                                </td>
+                                <td>
+                                    <form id="form-{{ $pengumpulan->id }}"
+                                        action="{{ route('pengumpulan.dosenUpdate', $pengumpulan->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endsection

@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="container">
-            <h2>Edit Pengguna</h2>
+            <h4>Edit Pengguna</h4>
 
             <form action="{{ url('akun/update', $akun->id) }}" method="POST">
                 @csrf
@@ -28,17 +28,6 @@
                                 class="form-control @error('username') is-invalid @enderror" placeholder="Masukkan Username"
                                 value="{{ $akun->username }}">
                             @error('username')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="row py-2">
-                            <label for="password">Password</label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Masukkan Password">
-                            @error('password')
                                 <small class="text-danger">
                                     {{ $message }}
                                 </small>

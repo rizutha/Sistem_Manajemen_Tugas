@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_tugass');
             $table->unsignedBigInteger('id_mahasiswas');
-            $table->string('link_tugas');
+            $table->string('link_tugas')->nullable();
             $table->integer('nilai')->nullable();
-            $table->dateTime('tgl_pengumpulan');
+            $table->dateTime('tgl_pengumpulan')->nullable();
             $table->string('komentar')->nullable();
             $table->foreign('id_tugass')->references('id')->on('tugass')->onDelete('cascade');
             $table->foreign('id_mahasiswas')->references('id')->on('mahasiswas')->onDelete('cascade');

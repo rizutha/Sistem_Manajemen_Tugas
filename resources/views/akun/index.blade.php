@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Data Pengguna</h2>
+            <h4>Data Pengguna</h4>
 
             <div class="mb-3">
                 <a href="/akun/create" class="btn btn-primary">Tambah Pengguna</a>
@@ -15,16 +15,16 @@
         <table class="table-hover table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th width="50px">No</th>
+                    <th width="250px">Nama</th>
+                    <th width="150px">Username</th>
+                    <th width="250px">Email</th>
+                    <th width="150px">Role</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-    
+
                 @foreach ($akun as $user => $row)
                     <tr>
                         <td>{{ $akun->firstItem() + $user }}</td>
@@ -34,7 +34,7 @@
                         <td>{{ $row->role }}</td>
                         <td>
                             <a href="{{ url('akun/detail', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="{{ url('akun/edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ url('akun/edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <form action="{{ url('akun/destroy', $row->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

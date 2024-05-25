@@ -2,10 +2,10 @@
 @section('title', 'Dosen')
 
 @section('content')
-    <div class="rounded-2 bg-light container mb-5 mt-5 p-5 shadow-lg">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="">
-                <h2 class="text-dark m-0">Tambah Data Dosen</h2>
+                <h4>Tambah Data Dosen</h4>
             </div>
         </div>
         <br>
@@ -17,21 +17,12 @@
             <div class="row">
                 <div class="col px-4">
                     <div class="row py-2">
-                        <label for="">NIP <span class="text-danger">*</span></label>
-                        <input type="text" name="nip"
-                            class="form-control @if ($errors->has('nip')) is-invalid @endif"
-                            placeholder="Masukkan NIP" value="{{ old('nip') }}">
-                        @if ($errors->has('nip'))
-                            <small class="text-danger">
-                                {{ $errors->first('nip') }}
-                            </small>
-                        @endif
-                    </div>
-                    <div class="row py-2">
-                        <label for="">Nama <span class="text-danger">*</span></label>
-                        <input type="text" name="nama"
-                            class="form-control @if ($errors->has('nama')) is-invalid @endif"
-                            placeholder="Masukkan Nama" value="{{ old('nama') }}">
+                        <label for="users_id">Nama <span class="text-danger">*</span></label>
+                        <select name="users_id" class="form-control" required>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }} </option>
+                            @endforeach
+                        </select>
                         @if ($errors->has('nama'))
                             <small class="text-danger">
                                 {{ $errors->first('nama') }}
@@ -79,17 +70,6 @@
                         @if ($errors->has('kontak'))
                             <small class="text-danger">
                                 {{ $errors->first('kontak') }}
-                            </small>
-                        @endif
-                    </div>
-                    <div class="row py-2">
-                        <label for="">Email <span class="text-danger">*</span></label>
-                        <input type="email" name="email"
-                            class="form-control @if ($errors->has('email')) is-invalid @endif"
-                            placeholder="Masukkan Email" value="{{ old('email') }}">
-                        @if ($errors->has('email'))
-                            <small class="text-danger">
-                                {{ $errors->first('email') }}
                             </small>
                         @endif
                     </div>

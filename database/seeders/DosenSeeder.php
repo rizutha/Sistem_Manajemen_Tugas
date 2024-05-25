@@ -15,7 +15,7 @@ class DosenSeeder extends Seeder
     {
         Dosen::insert([
             [
-                'nip' => '23232323',
+                'nip' => '1',
                 'nama' => 'Husni Faqih',
                 'codename' => 'HNF',
                 'tgl_lahir' => '1999-01-10',
@@ -27,7 +27,7 @@ class DosenSeeder extends Seeder
                 'users_id' => '2',
             ],
             [
-                'nip' => '23232324',
+                'nip' => '2',
                 'nama' => 'Husni Mubarok',
                 'codename' => 'HUB',
                 'tgl_lahir' => '1999-01-10',
@@ -39,7 +39,7 @@ class DosenSeeder extends Seeder
                 'users_id' => '3',
             ],
             [
-                'nip' => '23232325',
+                'nip' => '3',
                 'nama' => 'Sopian Aji',
                 'codename' => 'SOP',
                 'tgl_lahir' => '1999-01-10',
@@ -51,7 +51,7 @@ class DosenSeeder extends Seeder
                 'users_id' => '4',
             ],
             [
-                'nip' => '23232326',
+                'nip' => '4',
                 'nama' => 'Fanny Fatma Wati',
                 'codename' => 'FFW',
                 'tgl_lahir' => '1999-01-10',
