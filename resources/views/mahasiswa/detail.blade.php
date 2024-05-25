@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
-        <div class="bg-light rounded-2 container p-5 shadow-lg">
-            <h2>Detail Mahasiswa</h2>
+    <div class="rounded-4 card mb-5 px-5 py-4">
+        <div class="">
+            <h4>Detail Mahasiswa</h4>
 
             <div class="row">
                 @if ($mahasiswa->foto)

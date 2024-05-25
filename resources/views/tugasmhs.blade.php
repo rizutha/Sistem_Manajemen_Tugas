@@ -3,9 +3,9 @@
 @section('content')
     <!-- Sertakan Bootstrap CSS dan JS (gantilah dengan jalur file yang sesuai) -->
 
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Data Tugas</h2>
+            <h4>Data Tugas</h4>
 
             <div class="mb-3">
                 <a href="/pengumpulan" class="btn btn-primary">Tugas Selesai</a>

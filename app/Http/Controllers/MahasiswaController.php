@@ -26,41 +26,41 @@ class MahasiswaController extends Controller
         return view('mahasiswa.create', compact('users', 'kelas'));
     }
     public function store(Request $request)
-{
-    $request->validate([
-        'id_kelas' => 'required',
-        'alamat' => 'required',
-        'tgl_lahir' => 'required|date',
-        'kontak' => 'required',
-        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $request->validate([
+            'id_kelas' => 'required',
+            'alamat' => 'required',
+            'tgl_lahir' => 'required|date',
+            'kontak' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Logika untuk menentukan NIM otomatis
-    $nim = Mahasiswa::count() + 1;
+        // Logika untuk menentukan NIM otomatis
+        $nim = Mahasiswa::count() + 1;
 
-    // Pemanggilan Nama dari Tabel User
-    $user_id = $request->input('users_id'); // Ambil nilai users_id dari dropdown
-    $user = User::find($user_id); // Cari data user berdasarkan ID yang dipilih
+        // Pemanggilan Nama dari Tabel User
+        $user_id = $request->input('users_id'); // Ambil nilai users_id dari dropdown
+        $user = User::find($user_id); // Cari data user berdasarkan ID yang dipilih
 
-    if ($request->hasFile('foto')) {
-        $foto = $request->file('foto');
-        $filename = 'FTM' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
-        $foto->storeAs('public/mahasiswa/' . $filename);
-    }
-    // Simpan data mahasiswa baru
-    Mahasiswa::create([
-        'users_id' => $user->id,
-        'id_kelas' => $request->id_kelas,
-        'nim' => $nim,
-        'nama' => $user->name, // Gunakan nama dari user yang dipilih
-        'alamat' => $request->alamat,
-        'tgl_lahir' => $request->tgl_lahir,
-        'kontak' => $request->kontak,
-        'email' => $user->email, // Gunakan email dari user yang dipilih
-        'foto' => $filename,
-    ]);
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $filename = 'FTM' . date('Ymd') . rand() . '.' . $foto->getClientOriginalExtension();
+            $foto->storeAs('public/mahasiswa/' . $filename);
+        }
+        // Simpan data mahasiswa baru
+        Mahasiswa::create([
+            'users_id' => $user->id,
+            'id_kelas' => $request->id_kelas,
+            'nim' => $nim,
+            'nama' => $user->name, // Gunakan nama dari user yang dipilih
+            'alamat' => $request->alamat,
+            'tgl_lahir' => $request->tgl_lahir,
+            'kontak' => $request->kontak,
+            'email' => $user->email, // Gunakan email dari user yang dipilih
+            'foto' => $filename,
+        ]);
 
-    return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
 
     public function show($id)
@@ -83,6 +83,7 @@ class MahasiswaController extends Controller
             'alamat' => 'required',
             'tgl_lahir' => 'required|date',
             'kontak' => 'required',
+            'id_kelas' => 'required',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Foto tidak wajib
         ]);
 
@@ -107,6 +108,7 @@ class MahasiswaController extends Controller
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->tgl_lahir = $request->tgl_lahir;
         $mahasiswa->kontak = $request->kontak;
+        $mahasiswa->id_kelas = $request->id_kelas;
         $mahasiswa->save();
 
         return redirect()->route('mahasiswa.index')
@@ -140,8 +142,4 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::where('users_id', $auth)->first();
         return view('profilmhs', compact('mahasiswa'));
     }
-
 }
-
-
-

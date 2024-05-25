@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <h1>Edit Tugas</h1>
 
         @if ($errors->any())

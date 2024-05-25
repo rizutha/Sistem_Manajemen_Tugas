@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
-        <h2>Detail Dosen</h2>
+    <div class="rounded-4 card mb-5 px-5 py-4">
+        <h4>Detail Dosen</h4>
 
         <div class="row">
             @if ($dosen->foto)

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="container">
-                <h2>Data Kelas</h2>
+                <h4>Data Kelas</h4>
 
                 <div class="form-group">
                     <label for="kelas-select">Pilih Kelas:</label>

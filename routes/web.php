@@ -62,7 +62,7 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
 });
 Route::group(['middleware' => 'checkRole:dosen'], function () {
 
-    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
+    Route::get('/tugaskelas', [TugasController::class, 'index'])->name('tugas.index');
     Route::get('/tugas/create', [TugasController::class, 'create'])->name('tugas.create');
     Route::post('/tugas', [TugasController::class, 'store'])->name('tugas.store');
     Route::get('/tugas/{id}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'checkRole:dosen'], function () {
 });
 
 Route::group(['middleware' => 'checkRole:mahasiswa'], function () {
-    Route::get('/tugas', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
+    Route::get('/datatugas', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
     Route::get('/pengumpulan/create', [PengumpulanController::class, 'create'])->name('pengumpulan.create');
     Route::post('/pengumpulan/store', [PengumpulanController::class, 'store'])->name('pengumpulan.store');
     Route::get('/pengumpulan/{id}/edit', [PengumpulanController::class, 'edit'])->name('pengumpulan.edit');

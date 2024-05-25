@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="container">
-            <h2>Edit Pengguna</h2>
+            <h4>Edit Pengguna</h4>
 
             <form action="{{ url('akun/update', $akun->id) }}" method="POST">
                 @csrf

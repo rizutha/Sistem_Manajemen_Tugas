@@ -2,10 +2,10 @@
 @section('title', 'Kelas')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="">
-                <h2 class="text-dark m-0">Edit Data Kelas</h2>
+                <h4 class="text-dark m-0">Edit Data Kelas</h4>
             </div>
         </div>
         <br>

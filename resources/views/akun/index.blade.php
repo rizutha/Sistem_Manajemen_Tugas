@@ -5,7 +5,7 @@
 @section('content')
     <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Data Pengguna</h2>
+            <h4>Data Pengguna</h4>
 
             <div class="mb-3">
                 <a href="/akun/create" class="btn btn-primary">Tambah Pengguna</a>

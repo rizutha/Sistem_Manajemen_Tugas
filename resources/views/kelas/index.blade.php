@@ -3,7 +3,7 @@
 @section('content')
     <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Data Kelas</h2>
+            <h4>Data Kelas</h4>
 
             <div class="mb-3">
                 <a href="{{ route('kelas.create') }}" class="btn btn-primary">Tambah Kelas</a>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="container">
-            <h2>Edit Mahasiswa</h2>
+            <h4>Edit Mahasiswa</h4>
 
             <form action="{{ route('mahasiswa.update', $mahasiswa->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -52,6 +52,20 @@
                                 </small>
                             @enderror
                         </div>
+                        <div class="row py-2">
+                            <label for="id_kelas">Kelas <span class="text-danger">*</span></label>
+                            <select name="id_kelas" class="form-control @error('id_kelas') is-invalid @enderror">
+                                @foreach ($kelas as $kelas)
+                                    <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_kelas')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+
                     </div>
                     <div class="col px-5">
                         <div class="row py-2">

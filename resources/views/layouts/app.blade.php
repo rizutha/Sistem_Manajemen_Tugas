@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+        body {
+            font-family: "Nunito", sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -122,7 +129,7 @@
                                 </li>
                                 <!-- Tugas Nav Item -->
                                 <li class="sidebar-item {{ strpos(request()->url(), 'tugas') !== false ? 'active' : '' }}">
-                                    <a href="/tugas" class='sidebar-link'>
+                                    <a href="/tugaskelas" class='sidebar-link'>
                                         <i class="bi bi-journal"></i>
                                         <span>Data Tugas</span>
                                     </a>
@@ -132,7 +139,7 @@
                             @case('mahasiswa')
                                 <!-- Tugas Nav Item -->
                                 <li class="sidebar-item {{ strpos(request()->url(), 'tugasmhs') !== false ? 'active' : '' }}">
-                                    <a href="/tugas" class='sidebar-link'>
+                                    <a href="/datatugas" class='sidebar-link'>
                                         <i class="bi bi-journal"></i>
                                         <span>Data Tugas</span>
                                     </a>
@@ -147,7 +154,7 @@
             </div>
         </div>
 
-        <div id="main">
+        <div id="main" class=''>
             <header class="mb-1">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
@@ -164,15 +171,13 @@
                             fill="#1C274C" />
                     </svg>
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn dropdown-toggle rounded-3" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {{ Auth::user()->name }}
                         </button>
-                        <ul class="dropdown-menu rounded-4 p-2 shadow-lg">
+                        <ul class="dropdown-menu rounded-4 px-2 py-3 shadow-lg">
                             @switch(auth()->user()->role)
                                 @case('admin')
-                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
-                                            href="/profilmhs">Profil<i class="bi bi-person"></i></a></li>
                                     <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
                                             onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
@@ -207,104 +212,39 @@
                     </div>
                 </section>
             </div>
+        </div>
+    </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-            </script>
-            <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
-            <script>
-                const THEME_KEY = "theme"
+    <script src="{{ asset('mazer/assets/static/js/initTheme.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
 
-                function toggleDarkTheme() {
-                    setTheme(
-                        document.documentElement.getAttribute("data-bs-theme") === 'dark' ?
-                        "light" :
-                        "dark"
-                    )
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <!-- Need: Apexcharts -->
+    <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script>
+
+    <script>
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Logout',
+                text: 'Apakah anda ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Konfirmasi Logout',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi logout, arahkan ke tautan logout
+                    window.location.href = '/logout';
                 }
-
-                /**
-                 * Set theme for mazer
-                 * @param {"dark"|"light"} theme
-                 * @param {boolean} persist 
-                 */
-                function setTheme(theme, persist = false) {
-                    document.body.classList.add(theme)
-                    document.documentElement.setAttribute('data-bs-theme', theme)
-
-                    if (persist) {
-                        localStorage.setItem(THEME_KEY, theme)
-                    }
-                }
-
-                /**
-                 * Init theme from setTheme()
-                 */
-                function initTheme() {
-                    //If the user manually set a theme, we'll load that
-                    const storedTheme = localStorage.getItem(THEME_KEY)
-                    if (storedTheme) {
-                        return setTheme(storedTheme)
-                    }
-                    //Detect if the user set his preferred color scheme to dark
-                    if (!window.matchMedia) {
-                        return
-                    }
-
-                    //Media query to detect dark preference
-                    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-
-                    //Register change listener
-                    mediaQuery.addEventListener("change", (e) =>
-                        setTheme(e.matches ? "dark" : "light", true)
-                    )
-                    return setTheme(mediaQuery.matches ? "dark" : "light", true)
-                }
-
-                window.addEventListener('DOMContentLoaded', () => {
-                    const toggler = document.getElementById("toggle-dark")
-                    const theme = localStorage.getItem(THEME_KEY)
-
-                    if (toggler) {
-                        toggler.checked = theme === "dark"
-
-                        toggler.addEventListener("input", (e) => {
-                            setTheme(e.target.checked ? "dark" : "light", true)
-                        })
-                    }
-
-                });
-
-                initTheme()
-            </script>
-            <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-            <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-            <!-- Need: Apexcharts -->
-            <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-            <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
-
-            <script>
-                function confirmLogout() {
-                    Swal.fire({
-                        title: 'Logout',
-                        text: 'Apakah anda ingin logout?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Konfirmasi Logout',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Jika pengguna mengonfirmasi logout, arahkan ke tautan logout
-                            window.location.href = '/logout';
-                        }
-                    });
-                }
-            </script>
+            });
+        }
+    </script>
 
 </body>
 

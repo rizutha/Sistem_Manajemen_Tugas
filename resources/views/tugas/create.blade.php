@@ -92,52 +92,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Buat Tugas Baru</h1>
+    <div class="rounded-4 card mb-5 px-5 py-4">
+        <h1>Buat Tugas Baru</h1>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-    <form action="{{ route('tugas.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+        <form action="{{ route('tugas.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-        <div class="form-group">
-            <label for="id_mapel">Mata Pelajaran</label>
-            <select name="id_mapel" id="id_mapel" class="form-control" required>
-                <option value="">Pilih Mata Pelajaran</option>
-                @foreach($mapels as $mapel)
-                    <option value="{{ $mapel->id }}">{{ $mapel->nama_matkul }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="pertemuan">Pertemuan</label>
-            <input type="text" name="pertemuan" id="pertemuan" class="form-control" required>
-        </div>
+            <div class="form-group">
+                <label for="id_mapel">Mata Pelajaran</label>
+                <select name="id_mapel" id="id_mapel" class="form-control" required>
+                    <option value="">Pilih Mata Pelajaran</option>
+                    @foreach ($mapels as $mapel)
+                        <option value="{{ $mapel->id }}">{{ $mapel->nama_matkul }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pertemuan">Pertemuan</label>
+                <input type="text" name="pertemuan" id="pertemuan" class="form-control" required>
+            </div>
 
-        <div class="form-group">
-            <label for="tgl_buat">Tanggal Buat</label>
-            <input type="date" name="tgl_buat" id="tgl_buat" class="form-control" required>
-        </div>
+            <div class="form-group">
+                <label for="tgl_buat">Tanggal Buat</label>
+                <input type="date" name="tgl_buat" id="tgl_buat" class="form-control" required>
+            </div>
 
-        <div class="form-group">
-            <label for="tgl_dl">Tanggal Deadline</label>
-            <input type="date" name="tgl_dl" id="tgl_dl" class="form-control" required>
-        </div>
+            <div class="form-group">
+                <label for="tgl_dl">Tanggal Deadline</label>
+                <input type="date" name="tgl_dl" id="tgl_dl" class="form-control" required>
+            </div>
 
-        <div class="form-group">
-            <label for="file_tugas">File Tugas</label>
-            <input type="file" name="file_tugas" id="file_tugas" class="form-control">
-        </div>
+            <div class="form-group">
+                <label for="file_tugas">File Tugas</label>
+                <input type="file" name="file_tugas" id="file_tugas" class="form-control">
+            </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
 @endsection

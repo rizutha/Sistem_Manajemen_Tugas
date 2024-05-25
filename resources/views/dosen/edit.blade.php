@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="container">
-            <h2>Edit Dosen</h2>
+            <h4>Edit Dosen</h4>
 
             <form action="{{ route('dosen.update', $dosen->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf

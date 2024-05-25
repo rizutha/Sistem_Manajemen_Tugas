@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 p-5">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <div class="d-flex justify-content-between">
             <div class="container">
-                <h1>Dashboard Dosen</h1>
+                <h4>Dashboard Dosen</h4>
                 @foreach ($kelasDosen as $kelas)
                     <h2>Kelas: {{ $kelas->kelas }}</h2> <!-- Menampilkan nama kelas -->
                     @if (isset($daftarMahasiswa[$kelas->id]) && $daftarMahasiswa[$kelas->id]->isNotEmpty())
