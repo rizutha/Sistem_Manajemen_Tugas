@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between">
             <h4>Data Mahasiswa</h4>
             <div class="mb-2">
-                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-2">Tambah Mahasiswa</a>
+                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-2">Tambah Data Mahasiswa</a>
             </div>
         </div>
 
@@ -19,7 +19,6 @@
                         <th width="125px">NIM</th>
                         <th width="250px">Nama</th>
                         <th width="125px">Kelas</th>
-                        {{-- <th width="250px">Prodi</th> --}}
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -30,7 +29,6 @@
                             <td>{{ $row->nim }}</td>
                             <td>{{ $row->nama }}</td>
                             <td>{{ $row->kelas->kelas }}</td>
-                            {{-- <td>{{ $row->kelas->prodi }}</td> --}}
                             <td>
                                 <a href="{{ route('mahasiswa.detail', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
                                 <a href="{{ route('mahasiswa.edit', $row->id) }}" class="btn btn-sm btn-primary">Edit</a>
