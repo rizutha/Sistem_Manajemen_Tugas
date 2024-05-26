@@ -20,5 +20,6 @@
                 <p class="card-text">Dosen Matkul: {{ $dosen->keilmuan }}</p>
             </div>
         </div>
+        <a href="/beranda" class="btn btn-secondary mt-3">Kembali</a>
     </div>
 @endsection

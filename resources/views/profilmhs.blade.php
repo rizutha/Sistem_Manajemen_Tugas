@@ -26,6 +26,6 @@
                 <p class="card-text">Kelas: {{ $mahasiswa->kelas->kelas }}</p>
             </div>
         </div>
-        {{-- <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3">Kembali</a> --}}
+        <a href="/beranda" class="btn btn-secondary mt-3">Kembali</a>
     </div>
 @endsection
