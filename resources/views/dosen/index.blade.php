@@ -16,7 +16,7 @@
                     <th width="50px">No</th>
                     <th width="125px">NIP</th>
                     <th width="300px">Nama</th>
-                    <th width="250px">Dosen Matkul</th>
+                    <th width="250px">Prodi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>

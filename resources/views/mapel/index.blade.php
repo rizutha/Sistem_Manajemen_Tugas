@@ -19,7 +19,7 @@
                     <tr>
                         <th width="50px">No</th>
                         <th width="125px">Kelas</th>
-                        {{-- <th width="250px">Prodi</th> --}}
+                        <th width="250px">Prodi</th>
                         <th width="250px">Nama Matkul</th>
                         <th width="250px">Nama Dosen Pengajar</th>
                         <th>Aksi</th>
@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $mapel->kelas->kelas }}</td>
-                            {{-- <td>{{ $mapel->kelas->prodi }}</td> --}}
+                            <td>{{ $mapel->kelas->prodi }}</td>
                             <td>{{ $mapel->nama_matkul }}</td>
                             <td>{{ $mapel->dosen->nama }}</td>
                             <td>
