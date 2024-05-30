@@ -26,6 +26,9 @@ Route::get('/', function () {
 });
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
+Route::get('/change-password', [AuthController::class, 'changePassword'])->middleware('auth')->name('change.password');
+
+Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth')->name('update.password');
 
 Route::get('/beranda', function () {
     return view('dashboard');

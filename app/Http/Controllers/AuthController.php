@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -173,6 +174,30 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             // Handle exceptions, log errors, or return an appropriate response
             return redirect('akun')->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    public function changePassword()
+    {
+        return view('change_password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Password saat ini salah']);
+        }
+
+        $user->update(['password' => Hash::make($request->new_password)]); {
+            notify()->success('Password Berhasil Diubah!');
+            return redirect()->intended('/beranda');
         }
     }
 }
