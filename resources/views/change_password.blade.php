@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="rounded-4 card mb-5 px-5 py-4">
         <h2>Ubah Password</h2>
         <form action="{{ route('update.password') }}" method="POST">
             @csrf
