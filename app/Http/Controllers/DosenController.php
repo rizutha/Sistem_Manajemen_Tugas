@@ -338,7 +338,6 @@ class DosenController extends Controller
 
     public function showProfil()
     {
-        // Mengambil ID Dosen dari user yang sedang login
         $userId = auth()->user()->id;
         $dosen = Dosen::where('users_id', $userId)->first();
 

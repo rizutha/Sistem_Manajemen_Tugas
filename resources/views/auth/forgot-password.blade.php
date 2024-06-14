@@ -28,6 +28,8 @@
             </ul>
         </div>
     </nav>
+
+
     <div class="container">
         <div class="row gx-lg-5 justify-content-evenly mt-5">
             <div class="col-lg-6 mb-5">
@@ -45,29 +47,32 @@
                     <x-notify::notify />
                     @notifyJs
                     <div class="card-body px-md-5 py-5">
-                        <form id="loginForm" action="/login" method="post">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('password.email') }}">
                             @csrf
-                            <h2 class="mb-4"><strong>Silahkan Login terlebih dahulu</strong></h2>
+                            <div class="d-flex flex-column">
+                                <div class="form-group mb-4">
+                                    <label class="form-label">Email Address</label>
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email" autofocus
+                                        placeholder="Masukkan Alamat Email">
 
-                            <div class="">
-                                <!-- Email input -->
-                                <div class="form-outline mb-2 mt-4">
-                                    <label class="form-label" for="form3Example3">Email address</label>
-                                    <input type="email" name="email" id="form3Example3" class="form-control" />
+                                    @error('email')
+                                        <div class="alert alert-danger mt-2">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
-
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example4">Password</label>
-                                    <input type="password" name="password" id="form3Example4" class="form-control" />
-                                </div>
-
-                                <!-- Submit button -->
                                 <div class="d-flex flex-column">
-                                    <button type="submit" class="btn bg-primary mb-2 text-white">
-                                        Login
-                                    </button>
-                                    <a href="/forgot-password" class="btn btn-outline-secondary">Lupa Password</a>
+                                    <button type="submit" class="btn bg-primary mb-2 text-white">Kirim Link Reset
+                                        Password</button>
+                                    <a href="/login" class="btn btn-outline-secondary">Login</a>
                                 </div>
                             </div>
                         </form>

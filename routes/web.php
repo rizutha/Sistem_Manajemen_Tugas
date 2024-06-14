@@ -9,6 +9,7 @@ use App\Http\Controllers\PengumpulanController;
 use App\Http\Controllers\TugasController;
 use App\Models\Tugas;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,26 @@ Route::get('/', function () {
 });
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
+Route::get('/change-password', [AuthController::class, 'changePassword'])->middleware('auth')->name('change.password');
+Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth')->name('update.password');
 
 Route::get('/beranda', function () {
     return view('dashboard');
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
+
+    Route::get('/akun', [AuthController::class, 'index']);
+    Route::get('/akun/create', [AuthController::class, 'create']);
+    Route::get('/akun/detail/{id}', [AuthController::class, 'detail']);
+    Route::get('/akun/edit/{id}', [AuthController::class, 'edit']);
+    Route::post('/akun/store', [AuthController::class, 'store']);
+    Route::post('/akun/update/{id}', [AuthController::class, 'akunUpdate']);
+    Route::get('/akun/{id}', [AuthController::class, 'show'])->name('mahasiswa.show');
+    Route::post('/akun/{id}', [AuthController::class, 'update']);
+    Route::delete('/akun/destroy/{id}', [AuthController::class, 'destroy']);
+
+    Route::resource('kelas', KelasController::class);
+    Route::resource('mapel', MapelController::class);
 
     Route::resource('mahasiswa', MahasiswaController::class);
 
@@ -46,19 +62,6 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::put('/dosen/{id}', [DosenController::class, 'update'])->name('dosen.update');
     Route::get('/dosen/{id}', [DosenController::class, 'show'])->name('dosen.show');
     Route::delete('/dosen/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
-
-    Route::get('/akun', [AuthController::class, 'index']);
-    Route::get('/akun/create', [AuthController::class, 'create']);
-    Route::get('/akun/detail/{id}', [AuthController::class, 'detail']);
-    Route::get('/akun/edit/{id}', [AuthController::class, 'edit']);
-    Route::post('/akun/store', [AuthController::class, 'store']);
-    Route::post('/akun/update/{id}', [AuthController::class, 'akunUpdate']);
-    Route::get('/akun/{id}', [AuthController::class, 'show'])->name('mahasiswa.show');
-    Route::post('/akun/{id}', [AuthController::class, 'update']);
-    Route::delete('/akun/destroy/{id}', [AuthController::class, 'destroy']);
-
-    Route::resource('kelas', KelasController::class);
-    Route::resource('mapel', MapelController::class);
 });
 Route::group(['middleware' => 'checkRole:dosen'], function () {
 
@@ -94,6 +97,19 @@ Route::group(['middleware' => 'checkRole:mahasiswa'], function () {
 
 });
 
+// ResetPassword Routes
+
+// Route::get('password/reset', function () {
+//     return view('auth.passwords.email');
+// })->name('password.request');
+
+// Route::post('password/email', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Route::get('password/reset/{token}', function ($token) {
+//     return view('auth.passwords.reset', ['token' => $token]);
+// })->name('password.reset');
+
+// Route::post('password/reset', [AuthController::class, 'resetPassword'])->name('password.update');
 
 
 Route::get('/logout', [AuthController::class, 'logout']);

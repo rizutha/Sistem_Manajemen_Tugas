@@ -187,6 +187,10 @@
                                     <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
                                             href="/profildsn">Profil<i class="bi bi-person"></i></a></li>
                                     <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            href="{{ route('change.password') }}">Ubah Password<i
+                                                class="bi bi-person"></i></a>
+                                    </li>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
                                             onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
                                 @break
@@ -194,6 +198,10 @@
                                 @case('mahasiswa')
                                     <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
                                             href="/profilmhs">Profil<i class="bi bi-person"></i></a></li>
+                                    <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
+                                            href="{{ route('change.password') }}">Ubah Password<i
+                                                class="bi bi-person"></i></a>
+                                    </li>
                                     <li><a class="dropdown-item rounded-3 d-flex justify-content-between btn"
                                             onclick="confirmLogout()">Logout<i class="bi bi-box-arrow-right"></i></a>
                                     </li>
