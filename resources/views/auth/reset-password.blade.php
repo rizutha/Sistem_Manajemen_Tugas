@@ -45,31 +45,50 @@
                     <x-notify::notify />
                     @notifyJs
                     <div class="card-body px-md-5 py-5">
-                        <form id="loginForm" action="/login" method="post">
-                            @csrf
-                            <h2 class="mb-4"><strong>Silahkan Login terlebih dahulu</strong></h2>
-
-                            <div class="">
-                                <!-- Email input -->
-                                <div class="form-outline mb-2 mt-4">
-                                    <label class="form-label" for="form3Example3">Email address</label>
-                                    <input type="email" name="email" id="form3Example3" class="form-control" />
-                                </div>
-
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example4">Password</label>
-                                    <input type="password" name="password" id="form3Example4" class="form-control" />
-                                </div>
-
-                                <!-- Submit button -->
-                                <div class="d-flex flex-column">
-                                    <button type="submit" class="btn bg-primary mb-2 text-white">
-                                        Login
-                                    </button>
-                                    <a href="/forgot-password" class="btn btn-outline-secondary">Lupa Password</a>
-                                </div>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
                             </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('password.update') }}">
+                            @csrf
+
+                            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                            <div class="form-group mb-2">
+                                <label class="form-label">Email Address</label>
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ $request->email ?? old('email') }}" required autocomplete="email"
+                                    autofocus placeholder="Masukkan Alamat Elamil">
+                                @error('email')
+                                    <div class="alert alert-danger mt-2">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <label class="form-label">Password</label>
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="new-password" placeholder="Masukkan Password Baru">
+                                @error('password')
+                                    <div class="alert alert-danger mt-2">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label class="form-label">Konfirmasi Password</label>
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" required autocomplete="new-password"
+                                    placeholder="Masukkan Konfirmasi Password Baru">
+                            </div>
+
+                            <button type="submit" class="btn bg-primary text-white">Ubah Password</button>
                         </form>
                     </div>
                 </div>
