@@ -23,8 +23,13 @@ use Illuminate\Support\Facades\Password;
 */
 
 Route::get('/', function () {
+    return view('landing');
+});
+Route::get('/masuk', function () {
     return view('login');
 });
+
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
 Route::get('/change-password', [AuthController::class, 'changePassword'])->middleware('auth')->name('change.password');
