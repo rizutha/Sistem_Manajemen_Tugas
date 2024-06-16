@@ -12,41 +12,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Optional: Add your own CSS styles here -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
-        body {
-            background-color: hsl(0, 0%, 96%);
-            font-family: "Nunito", sans-serif;
-        }
-
-        .cgradient {
-            background: rgb(143, 134, 248);
-            background: linear-gradient(125deg, rgba(143, 134, 248, 1) 0%, rgba(91, 79, 225, 1) 100%);
-        }
-
-        .c1 {
-            color: #5B4FE1;
-        }
-
-        .c2 {
-            color: #4FC5EB;
-        }
-
-        .c3 {
-            color: #FCD23A;
-        }
-
-        .c3b {
-            background-color: #FCD23A;
-        }
-
-        .p-shadow {
-            box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
-            -webkit-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
-            -moz-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
