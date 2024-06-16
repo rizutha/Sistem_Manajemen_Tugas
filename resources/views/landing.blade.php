@@ -39,7 +39,7 @@
             <div class="col position-relative">
                 <img src="{{ asset('assets/ellipse.png') }}" class="position-absolute fixed" alt=""
                     style=" top: -95%; left: -50%; z-index: -1;">
-                <h1>Tentang <span class="rounded-4 c1 c3b z-1 px-2 py-1">SMT</span></h1>
+                <h1 class="fw-bold">Tentang <span class="rounded-4 c1 c3b z-1 px-2 py-1">SMT</span></h1>
                 <p class="fs-4">Solusi ringan dan mudah untuk mengelola data tugas, kelas, informasi data siswa, dan data
                     guru</p>
                 <div class="col row z-1 gap-3 ps-3">
