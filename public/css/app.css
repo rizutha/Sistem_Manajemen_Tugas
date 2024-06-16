@@ -33,9 +33,9 @@
         }
 
         .p-shadow {
-            box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.30);
-            -webkit-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.30);
-            -moz-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.30);
+            box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
+            -webkit-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
+            -moz-box-shadow: 0px 14px 45px 0px rgba(91, 79, 225, 0.40);
         }
 
         .mt-section {
