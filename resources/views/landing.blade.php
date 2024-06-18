@@ -42,7 +42,7 @@
                 <img src="{{ asset('assets/star1.png') }}" class="position-absolute fixed"
                     style="width: 70px; top: 70%; right: 50%" alt="">
                 <img src="{{ asset('assets/ornament.png') }}" class="position-absolute fixed"
-                    style="width: 200px; top: -90%; right: 55%" alt="">
+                    style="width: 200px; top: -73%; right: 55%" alt="">
             </div>
         </div>
         <div
