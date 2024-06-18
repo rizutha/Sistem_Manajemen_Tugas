@@ -1,10 +1,41 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <nav class="d-flex justify-content-center bg-dark align-items-center container sticky pb-2 pt-3 text-white">
-        <p>Disini Navbar "Hapus aja line ini kalo mau bikin nav dari scratch"</p>
-    </nav>
-
+        <header>
+            <nav class="navbar">
+                <div class="container">
+                    <a href="#" class="logo" style="text-decoration: none; font-size: 20px; color: #161616;">
+                        <img src="{{ asset('assets/atom.png') }}" alt="Logo" style="margin-right: 8px">
+                        Sistem Manajemen Tugas
+                    </a>
+                    <img src="{{ asset('assets/ornament.png') }}" class="position-absolute fixed" style="width: 200px; top: 1%; right: 55%" alt="">
+                    <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4" style="list-style-type: none; margin: 0; padding: 0;">
+                        <li><a href="#" class="nav-link" style="text-decoration: none; color: #161616; font-size: 18px;">Beranda</a></li>
+                        <li><a href="#" class="nav-link" style="text-decoration: none; color: #161616; font-size: 18px;">Layanan</a></li>
+                        <li><a href="#" class="nav-link" style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
+                        <li><a href="#" class="btn-masuk cgradient align-items-center rounded-4 p-shadow px-4 py-2" style="text-decoration: none; color: white;">Masuk</a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+        </header>
+        <div class="mt-section mb-section container">
+            <div class="row gap-5 ">
+                <div class="col position-relative mb-5">
+                    <h1 class="fw-bold mb-4">Permudah Proses Pembelajaran</h1>
+                    <p class="fs-4 mb-4">SMT sebagai solusi terbaik untuk manajemen tugas yang lebih efisien</p>
+                    <a href="#" class="btn-masuk cgradient align-items-center rounded-4 p-shadow px-4 py-2" style="text-decoration: none; color: white; ">Mulai Sekarang</a>
+                </div>
+                <div class="col position-relative " width="500px">
+                    <img src="{{ asset('assets/hero.png') }}" alt="" class="position-absolute translate-middle fixed" alt=""
+                    style=" top: 30%; left:50%; z-index: -1;">
+                    <img src="{{ asset('assets/ellipse.png') }}" class="position-absolute fixed " alt=""
+                        style=" left:40%; z-index: -2;">
+                </div>
+                <img src="{{ asset('assets/star1.png') }}" class="position-absolute fixed" style="width: 70px; top: 70%; right: 50%"
+            alt="">
+            </div>
+        </div>
     <div
         class="d-flex align-items-center cgradient-s rounded-5 p-shadow position-relative mt-section container overflow-hidden pb-4 pt-5">
         <div class="row px-4">
@@ -39,8 +70,8 @@
             <div class="col position-relative">
                 <img src="{{ asset('assets/ellipse.png') }}" class="position-absolute fixed" alt=""
                     style=" top: -95%; left: -50%; z-index: -1;">
-                <h1 class="fw-bold">Tentang <span class="rounded-4 c1 c3b z-1 px-2 py-1">SMT</span></h1>
-                <p class="fs-4">Solusi ringan dan mudah untuk mengelola data tugas, kelas, informasi data siswa, dan data
+                <h1 class="fw-bold mb-4">Tentang <span class="rounded-4 c1 c3b z-1 px-2 py-1">SMT</span></h1>
+                <p class="fs-4 mb-4">Solusi ringan dan mudah untuk mengelola data tugas, kelas, informasi data siswa, dan data
                     guru</p>
                 <div class="col row z-1 gap-3 ps-3">
                     <div class="row d-flex flex-wrap gap-3">
