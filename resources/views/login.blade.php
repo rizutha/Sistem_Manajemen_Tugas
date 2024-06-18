@@ -1,21 +1,36 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <nav class="d-flex justify-content-center container mt-4">
-        <div class="sticky-nav animate__animated animate__fadeInDownBig mb-5">
-            <ul class="d-flex justify-content-center align-items-center rounded-4 px-4 py-3 shadow">
-                <li><a href="#beranda" class="link-nav-text fw-lg px-3 pt-1">Beranda</a></li>
-                <li><a href="#layanan" class="link-nav-text fw-lg px-3 pt-1">Layanan</a></li>
-                <li><a href="#tentang" class="link-nav-text fw-lg px-3 pt-1">Tentang</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header class="">
+        <nav class="navbar">
+            <div class="container">
+                <div class="d-flex">
+                    <img src="{{ asset('assets/atom.png') }}" alt="Logo" style="margin-right: 8px">
+                    <a href="#" class="logo" style="text-decoration: none; font-size: 20px; color: #161616;">
+                        Sistem Manajemen Tugas
+                    </a>
+                </div>
+
+                <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4"
+                    style="list-style-type: none; margin: 0; padding: 0;">
+                    <li><a href="#" class="nav-link"
+                            style="text-decoration: none; color: #161616; font-size: 18px;">Beranda</a></li>
+                    <li><a href="#" class="nav-link"
+                            style="text-decoration: none; color: #161616; font-size: 18px;">Layanan</a></li>
+                    <li><a href="#" class="nav-link"
+                            style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
+                    <li><a href="/login" class="btn-masuk cgradient align-items-center rounded-5 p-shadow px-4 py-2"
+                            style="text-decoration: none; color: white;">Masuk</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <div class="container">
-        <div class="row gx-lg-5 justify-content-evenly mt-5">
-            <div class="col-lg-6 mb-5">
-                <h1 class="display-5 fw-bold ls-tight my-5">
+        <div class="row justify-content-evenly mt-5">
+            <div class="col">
+                <h1 class="display-5 fw-bold ls-tight c1 my-5">
                     Sistem Manajemen Tugas <br />
-                    <span class="text-primary">Mahasiswa</span>
+                    <span class="rounded-4 c1 c3b px-3">Mahasiswa</span>
                 </h1>
                 <p style="color: hsl(217, 10%, 50.8%)">
                     Selamat Datang di Website untuk Memanajemen Tugas Mahasiswa!
@@ -46,10 +61,12 @@
 
                                 <!-- Submit button -->
                                 <div class="d-flex flex-column">
-                                    <button type="submit" class="btn bg-primary mb-2 text-white">
+                                    <button type="submit" class="rounded-5 p-shadow mb-2 px-4 py-2 text-white"
+                                        style="background: rgb(143, 134, 248);
+                                            background: linear-gradient(180deg, rgba(143, 134, 248, 1) 0%, rgba(91, 79, 225, 1) 100%);">
                                         Login
                                     </button>
-                                    <a href="/forgot-password" class="btn btn-outline-secondary">Lupa Password</a>
+                                    <a href="/forgot-password" class="btn btn-ghost">Lupa Password</a>
                                 </div>
                             </div>
                         </form>
