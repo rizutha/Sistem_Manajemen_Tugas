@@ -17,7 +17,6 @@
     <!-- Optional: Add your own CSS styles here -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-
 <body>
     <!-- Content -->
     @yield('content')

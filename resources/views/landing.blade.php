@@ -1,12 +1,12 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <header class="">
+    <header>
         <nav class="navbar">
             <div class="container">
-                <a href="#" class="logo" style="text-decoration: none; font-size: 20px; color: #161616;">
+                <a class="logo" style="text-decoration: none; font-size: 20px; color: #161616;">
                     <img src="{{ asset('assets/atom.png') }}" alt="Logo" style="margin-right: 8px">
-                    Sistem Manajemen Tugas
+                    <strong>Sistem Manajemen Tugas</strong>
                 </a>
 
                 <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4"
@@ -17,7 +17,7 @@
                             style="text-decoration: none; color: #161616; font-size: 18px;">Layanan</a></li>
                     <li><a href="#" class="nav-link"
                             style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
-                    <li><a href="/login" class="btn-masuk cgradient align-items-center rounded-5 p-shadow px-4 py-2"
+                    <li><a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-2"
                             style="text-decoration: none; color: white;">Masuk</a></li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col mb-5">
                     <h1 class="fw-bold mb-4" style="font-size: 72px">Permudah Proses Pembelajaran</h1>
                     <p class="fs-4 mb-5">SMT sebagai solusi terbaik untuk manajemen tugas yang lebih efisien</p>
-                    <a href="#" class="btn-masuk cgradient align-items-center rounded-5 p-shadow px-4 py-3"
+                    <a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-3"
                         style="text-decoration: none; color: white; ">Mulai Sekarang</a>
                 </div>
                 <div class="col position-relative" width="500px">

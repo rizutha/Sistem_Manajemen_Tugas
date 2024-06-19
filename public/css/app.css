@@ -54,3 +54,44 @@
         .mb-section {
             margin-bottom: 256px;
         }
+
+        header {
+            position: sticky;
+            padding: 16px 0;
+            top: 0;
+            margin-inline: 48px;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            border-radius: 25px;
+            background: transparent;
+            backdrop-filter: blur(75px);
+        }
+
+        .navbar {
+            padding-inline: 16px;
+        }
+
+        .nav-link:hover {
+            color: black;
+            font-weight: bold;
+        }
+
+        .btn-masuk {
+            background: rgb(143, 134, 248);
+            background: linear-gradient(180deg, rgba(143, 134, 248, 1) 0%, rgba(91, 79, 225, 1) 100%);
+        }
+        .btn-masuk:hover {
+            background: rgb(113, 100, 252);
+            background: linear-gradient(180deg, rgba(113, 100, 252, 1) 0%, rgb(69, 55, 221) 100%);
+        }
+        .btn-masuk:active {
+            background: rgb(164, 155, 247);
+            background: linear-gradient(180deg, rgba(164, 155, 247, 1) 0%, rgb(96, 88, 180) 100%);
+        }
+
+        
