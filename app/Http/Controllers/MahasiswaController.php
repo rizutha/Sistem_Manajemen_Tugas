@@ -131,11 +131,13 @@ class MahasiswaController extends Controller
         $query = Mahasiswa::orderBy('id', 'asc')->paginate(5);
         return view('datamhs', ['queries' => $query]);
     }
+
     public function detail($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
         return view('detailmhs', compact('mahasiswa'));
     }
+
     public function showProfil()
     {
         $auth = auth()->user()->id;

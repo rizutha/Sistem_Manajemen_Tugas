@@ -3,6 +3,9 @@
 @section('content')
     <header class="">
         <nav class="navbar">
+            @notifyCss
+            <x-notify::notify />
+            @notifyJs
             <div class="container">
                 <div class="d-flex">
                     <img src="{{ asset('assets/atom.png') }}" alt="Logo" style="margin-right: 8px">
@@ -10,17 +13,14 @@
                         Sistem Manajemen Tugas
                     </a>
                 </div>
-
                 <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4"
                     style="list-style-type: none; margin: 0; padding: 0;">
-                    <li><a href="#" class="nav-link"
+                    <li><a href="/" class="nav-link"
                             style="text-decoration: none; color: #161616; font-size: 18px;">Beranda</a></li>
                     <li><a href="#" class="nav-link"
                             style="text-decoration: none; color: #161616; font-size: 18px;">Layanan</a></li>
                     <li><a href="#" class="nav-link"
                             style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
-                    <li><a href="/login" class="btn-masuk cgradient align-items-center rounded-5 p-shadow px-4 py-2"
-                            style="text-decoration: none; color: white;">Masuk</a></li>
                 </ul>
             </div>
         </nav>
@@ -38,9 +38,6 @@
             </div>
             <div class="col-lg-4 mb-lg-0 mb-5">
                 <div class="rounded-4 shadow">
-                    @notifyCss
-                    <x-notify::notify />
-                    @notifyJs
                     <div class="card-body px-md-5 py-5">
                         <form id="loginForm" action="/login" method="post">
                             @csrf
