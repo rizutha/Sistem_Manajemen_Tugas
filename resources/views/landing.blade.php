@@ -29,8 +29,8 @@
                 <div class="col mb-5">
                     <h1 class="fw-bold mb-4" style="font-size: 72px">Permudah Proses Pembelajaran</h1>
                     <p class="fs-4 mb-5">SMT sebagai solusi terbaik untuk manajemen tugas yang lebih efisien</p>
-                    <a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-3"
-                        style="text-decoration: none; color: white; ">Mulai Sekarang</a>
+                    <a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-3" style=" ">Mulai
+                        Sekarang</a>
                 </div>
                 <div class="col position-relative" width="500px">
                     <img src="{{ asset('assets/hero.png') }}" alt=""
