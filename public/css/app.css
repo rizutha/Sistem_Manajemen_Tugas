@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
+:root {
+    --primary: linear-gradient(180deg, rgba(143, 134, 248, 1) 0%, rgba(91, 79, 225, 1) 100%);
+    --hover:  linear-gradient(180deg, rgba(113, 100, 252, 1) 0%, rgb(69, 55, 221) 100%);
+    --active:  linear-gradient(180deg, rgba(164, 155, 247, 1) 0%, rgb(96, 88, 180) 100%);
+  }
+
         body {
             background-color: hsl(0, 0%, 96%);
             font-family: "Nunito", sans-serif;
@@ -81,17 +87,22 @@
             font-weight: bold;
         }
 
+
+
         .btn-masuk {
-            background: rgb(143, 134, 248);
-            background: linear-gradient(180deg, rgba(143, 134, 248, 1) 0%, rgba(91, 79, 225, 1) 100%);
+            text-decoration: none; 
+            color: white;
+            background: var(--primary);
+            transition: all .4s ease-in-out;
         }
+        
         .btn-masuk:hover {
-            background: rgb(113, 100, 252);
-            background: linear-gradient(180deg, rgba(113, 100, 252, 1) 0%, rgb(69, 55, 221) 100%);
+            background: var(--hover);
+            transition: all .4s ease-in-out;
         }
+        
         .btn-masuk:active {
-            background: rgb(164, 155, 247);
-            background: linear-gradient(180deg, rgba(164, 155, 247, 1) 0%, rgb(96, 88, 180) 100%);
+            background: var(--active);
+            transition: all .4s ease-in-out;
         }
 
-        
