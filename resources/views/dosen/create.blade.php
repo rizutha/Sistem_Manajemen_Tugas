@@ -19,6 +19,7 @@
                     <div class="row py-2">
                         <label for="users_id">Nama <span class="text-danger">*</span></label>
                         <select name="users_id" class="form-control" required>
+                            <option value="">Pilih Nama</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }} </option>
                             @endforeach

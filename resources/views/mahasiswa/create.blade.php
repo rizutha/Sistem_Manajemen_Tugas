@@ -45,10 +45,23 @@
                 <input type="text" name="kontak" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="foto">Foto</label>
-                <input type="file" name="foto" class="form-control-file" required>
+                <label for="">Foto <span class="text-danger">*</span></label>
+                        <input type="file" name="foto"
+                            class="form-control @if ($errors->has('foto')) is-invalid @endif"
+                            placeholder="Pilih Foto" value="{{ old('foto') }}">
+                        <small>Tipe Foto: JPG/JPEG/PNG. Max: 10 MB.</small>
+                        @if ($errors->has('foto'))
+                            <br>
+                            <small class="text-danger">
+                                {{ $errors->first('foto') }}
+                            </small>
+                        @endif
+                {{-- <label for="foto">Foto</label>
+                <input type="file" name="foto" class="form-control-file" required> --}}
             </div>
             <button type="submit" class="btn btn-primary">Tambah Mahasiswa</button>
+            <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
+                Kembali</a>
         </form>
     </div>
     </div>
