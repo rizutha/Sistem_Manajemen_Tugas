@@ -38,6 +38,9 @@ Route::post('/update-password', [AuthController::class, 'updatePassword'])->midd
 Route::get('/beranda', function () {
     return view('dashboard');
 });
+
+// Route::get('/get-kelas-by-mapel/{id}', [TugasController::class, 'getKelasByMapel']);
+
 Route::group(['middleware' => 'checkRole:admin'], function () {
 
     Route::get('/akun', [AuthController::class, 'index']);
@@ -88,6 +91,7 @@ Route::group(['middleware' => 'checkRole:dosen'], function () {
     Route::patch('/pengumpulan/{id}/dosen-update', [PengumpulanController::class, 'dosenUpdate'])->name('pengumpulan.dosenUpdate');
     Route::get('/pengumpulan/tugas/{tugasId}', [PengumpulanController::class, 'index'])->name('pengumpulan.index');
     Route::get('/tugas/{tugasId}/pengumpulans', [TugasController::class, 'indexdosen'])->name('tugas.pengumpulans');
+    Route::get('/get-kelas/{id}', [TugasController::class, 'getKelas']);
 });
 
 Route::group(['middleware' => 'checkRole:mahasiswa'], function () {
