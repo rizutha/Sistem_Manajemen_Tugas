@@ -9,15 +9,25 @@ use Illuminate\Http\Request;
 
 class MapelController extends Controller
 {
+    // public function index()
+    // {
+    //     $mapels = Mapel::with(['kelas', 'dosen'])->paginate(10);
+    //     return view('mapel.index', compact('mapels'));
+    // }
     public function index()
     {
-        $mapels = Mapel::with(['kelas', 'dosen'])->paginate(10);
+        $mapels = Mapel::with(['kelas', 'dosen'])
+                    ->join('kelass', 'mapels.id_kelas', '=', 'kelass.id') // Join dengan tabel kelas
+                    ->orderBy('kelass.kelas', 'asc') // Urutkan berdasarkan nama kelas
+                    ->select('mapels.*') // Pilih semua kolom dari tabel mapel
+                    ->paginate(10);
+
         return view('mapel.index', compact('mapels'));
     }
 
     public function create()
     {
-        $list_kelas = Kelas::all();
+        $list_kelas = Kelas::orderBy('semester', 'asc')->get();
         $list_dosen = Dosen::all();
         return view('mapel.create', compact('list_kelas', 'list_dosen'));
     }
@@ -35,6 +45,7 @@ class MapelController extends Controller
 
         Mapel::create([
             'id_kelas' => $request->id_kelas,
+            'prodi' => $kelas->prodi,
             'dosen_pengajar' => $request->dosen_pengajar,
             'nama_matkul' => $request->nama_matkul,
         ]);

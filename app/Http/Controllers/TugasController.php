@@ -8,6 +8,7 @@ use App\Models\Mapel;
 use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class TugasController extends Controller
@@ -90,14 +91,14 @@ class TugasController extends Controller
         $dosen = Auth::user()->dosen;
         $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
         $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
-        return view('tugas.create', compact('kelas', 'mapels'));
+        return view('tugas.create', compact('kelas','mapels'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_mapel' => 'required|exists:mapels,id',
-            'pertemuan' => 'required',
+            // 'pertemuan' => 'required',
             'tgl_buat' => 'required|date',
             'tgl_dl' => 'required|date',
             'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
@@ -110,12 +111,21 @@ class TugasController extends Controller
             return redirect()->back()->with('error', 'Kelas tidak ditemukan untuk mapel tersebut.');
         }
 
+        // Ambil nilai pertemuan terakhir
+        $lastPertemuan = Tugas::where('id_kelas', $kelas->id)
+                            ->where('id_mapel', $mapel->id)
+                            ->orderBy('pertemuan', 'desc')
+                            ->value('pertemuan');
+
+        // Tentukan nilai pertemuan baru
+        $newPertemuan = $lastPertemuan ? $lastPertemuan + 1 : 1;
+
         $tugas = new Tugas([
             'id_dosens' => Auth::user()->dosen->id,
             'id_kelas' => $kelas->id,
-            'id_mapel' => $mapel->id,
+            'id_mapel' => $request->id_mapel,
             'matkul' => $mapel->nama_matkul,
-            'pertemuan' => $request->pertemuan,
+            'pertemuan' => $newPertemuan,
             'tgl_buat' => $request->tgl_buat,
             'tgl_dl' => $request->tgl_dl,
         ]);
@@ -246,4 +256,10 @@ class TugasController extends Controller
         $tugas = Tugas::findOrFail($tugasId);
         return view('tugas.pengumpulans', compact('pengumpulans', 'tugas'));
     }
+    public function getKelas($id)
+    {
+        $kelas = Kelas::find($id);
+        return response()->json($kelas);
+    }
+
 }

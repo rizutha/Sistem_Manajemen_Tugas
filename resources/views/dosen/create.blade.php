@@ -19,6 +19,7 @@
                     <div class="row py-2">
                         <label for="users_id">Nama <span class="text-danger">*</span></label>
                         <select name="users_id" class="form-control" required>
+                            <option value="">Pilih Nama</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }} </option>
                             @endforeach
@@ -101,13 +102,16 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            {{-- <div class="card-footer">
                 <div class="my-2">
                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
                     <a href="{{ route('dosen.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
                         Kembali</a>
                 </div>
-            </div>
+            </div> --}}
+            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
+                    <a href="{{ route('dosen.index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
+                        Kembali</a>
         </form>
     </div>
 @endsection

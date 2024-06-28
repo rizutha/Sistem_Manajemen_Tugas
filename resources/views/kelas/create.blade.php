@@ -66,8 +66,6 @@
                             </small>
                         @endif
                     </div>
-
-
                     <div class="row py-2">
                         <label for="">Wali Kelas <span class="text-danger">*</span></label>
                         <select name="wali_kelas" class="form-control @if ($errors->has('wali_kelas')) is-invalid @endif">
@@ -84,14 +82,13 @@
                             </small>
                         @endif
                     </div>
-
-                    <div class="card-footer">
+                    <div class="row py-2">
                         <div class="my-2">
                             <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-                            <a href="{{ route('kelas.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
+                            <a href="{{ route('kelas.index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
                                 Kembali</a>
                         </div>
-                    </div>
+                </div>
         </form>
     </div>
 @endsection

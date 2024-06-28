@@ -36,7 +36,23 @@ class MahasiswaController extends Controller
         ]);
 
         // Logika untuk menentukan NIM otomatis
-        $nim = Mahasiswa::count() + 1;
+        // $nim = Mahasiswa::count() + 1;
+
+        $lastMahasiswa = Mahasiswa::orderBy('nim', 'desc')->first();
+
+        // Jika ada NIM terakhir, tambahkan 1, jika tidak, mulai dengan NIM awal (misal 12221351)
+        if ($lastMahasiswa) {
+            // Ambil NIM terakhir dan tambahkan 1
+            $lastNim = $lastMahasiswa->nim;
+            $newNim = (int)$lastNim + 1;
+        } 
+        // else {
+        //     // Jika tidak ada mahasiswa di database, mulai dengan NIM awal
+        //     $newNim = 12221351;
+        // }
+
+        // NIM baru
+        $nim = $newNim;
 
         // Pemanggilan Nama dari Tabel User
         $user_id = $request->input('users_id'); // Ambil nilai users_id dari dropdown
@@ -131,11 +147,13 @@ class MahasiswaController extends Controller
         $query = Mahasiswa::orderBy('id', 'asc')->paginate(5);
         return view('datamhs', ['queries' => $query]);
     }
+
     public function detail($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
         return view('detailmhs', compact('mahasiswa'));
     }
+
     public function showProfil()
     {
         $auth = auth()->user()->id;
