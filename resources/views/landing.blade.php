@@ -9,7 +9,15 @@
                     <strong>Sistem Manajemen Tugas</strong>
                 </a>
 
-                <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4"
+                <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4" style="list-style-type: none; margin: 0; padding: 0;">
+                    <li><a href="#" class="nav-link active" style="text-decoration: none; color: #161616; font-size: 18px;">Beranda</a></li>
+                    <li><a href="#layanan" class="nav-link" style="text-decoration: none; color: #161616; font-size: 18px;">Layanan</a></li>
+                    <li><a href="#tentang" class="nav-link" style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
+                    <li><a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-2" style="text-decoration: none; color: white;">Masuk</a></li>
+                </ul>
+                
+
+                {{-- <ul class="nav-links d-flex justify-content-center flex-wrap gap-4 py-4"
                     style="list-style-type: none; margin: 0; padding: 0;">
                     <li><a href="#" class="nav-link"
                             style="text-decoration: none; color: #161616; font-size: 18px;">Beranda</a></li>
@@ -19,7 +27,7 @@
                             style="text-decoration: none; color: #161616; font-size: 18px;">Tentang</a></li>
                     <li><a href="/login" class="btn-masuk align-items-center rounded-5 p-shadow px-4 py-2"
                             style="text-decoration: none; color: white;">Masuk</a></li>
-                </ul>
+                </ul> --}}
             </div>
         </nav>
     </header>
@@ -46,7 +54,7 @@
             </div>
         </div>
         <div
-            class="d-flex align-items-center cgradient-s rounded-5 p-shadow position-relative mt-section container pb-4 pt-5">
+            class="d-flex align-items-center cgradient-s rounded-5 p-shadow position-relative mt-section container pb-4 pt-5" id="layanan">
             <img src="{{ asset('assets/ornament.png') }}" class="position-absolute fixed"
                 style="width: 200px; top: 38%; right: 97%; transform: rotate(90deg);" alt="">
             <img src="{{ asset('assets/ornament.png') }}" class="position-absolute fixed"
@@ -78,7 +86,7 @@
             <img src="{{ asset('assets/star.png') }}" class="position-absolute fixed"
                 style="width: 32px; top: 9%; right: 4%" alt="">
         </div>
-        <div class="mt-section mb-section container">
+        <div class="mt-section mb-section container" id="tentang">
             <div class="row gap-5">
                 <div class="col position-relative">
                     <img src="{{ asset('assets/ellipse.png') }}" class="position-absolute fixed" alt=""
@@ -127,4 +135,18 @@
             <h4 class="fw-bold pt-1">SMT 2024 Copyright</h4>
         </div>
     </footer>
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Tambahkan event listener ke setiap tautan
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Hapus kelas .active dari semua tautan
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                
+                // Tambahkan kelas .active ke tautan yang diklik
+                this.classList.add('active');
+            });
+        });
+    </script>
 @endsection

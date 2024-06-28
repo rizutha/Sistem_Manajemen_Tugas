@@ -12,7 +12,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
+                                <th scope="col">Pertemuan</th>
                                 <th scope="col">Tugas</th>
                                 <th scope="col">Deadline</th>
                                 <th scope="col">Dikumpulkan Pada</th>
@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($pengumpulans as $index => $pengumpulan)
                                 <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <th scope="row">{{ $pengumpulan->tugas->pertemuan }}</th>
                                     <td>{{ $pengumpulan->tugas->matkul }}</td>
                                     <td>{{ $pengumpulan->tugas->tgl_dl }}</td>
                                     <td>{{ $pengumpulan->tgl_pengumpulan }}</td>

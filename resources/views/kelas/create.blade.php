@@ -85,7 +85,7 @@
                     <div class="row py-2">
                         <div class="my-2">
                             <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-                            <a href="{{ route('kelas.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
+                            <a href="{{ route('kelas.index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
                                 Kembali</a>
                         </div>
                 </div>

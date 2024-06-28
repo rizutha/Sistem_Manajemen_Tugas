@@ -59,13 +59,9 @@
                 {{-- <label for="foto">Foto</label>
                 <input type="file" name="foto" class="form-control-file" required> --}}
             </div>
-            <button type="submit" class="btn btn-primary">Tambah Mahasiswa</button>
-            <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
+            <button type="submit" class="btn btn-success">Simpan Data</button>
+            <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
                 Kembali</a>
         </form>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
 @endsection

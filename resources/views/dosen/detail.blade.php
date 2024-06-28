@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="rounded-4 card mb-5 px-5 py-4">
+        <div class="">
         <h4>Detail Dosen</h4>
-
         <div class="row">
             @if ($dosen->foto)
                 <img src="{{ asset('storage/dosen/' . $dosen->foto) }}" style="width:250px" class="rounded-3 col-auto" />
@@ -20,8 +20,8 @@
                 <p class="card-text">Dosen Matkul: {{ $dosen->keilmuan }}</p>
             </div>
         </div>
-
-
-        <a href="{{ route('dosen.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+        <a href="{{ route('dosen.index') }}" class="btn btn-secondary mt-3 d-inline-block">Kembali</a>
     </div>
 @endsection
+
+

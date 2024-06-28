@@ -87,7 +87,10 @@
             font-weight: bold;
         }
 
-
+        .nav-link.active {
+            color: black;
+            font-weight: bold; /* Ganti dengan warna yang diinginkan untuk tautan aktif */
+        }
 
         .btn-masuk {
             text-decoration: none; 

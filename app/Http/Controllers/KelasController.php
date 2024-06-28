@@ -10,7 +10,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $query = Kelas::orderBy('id', 'asc')->paginate(5);
+        $query = Kelas::orderBy('semester', 'asc')->paginate(5);
         return view('kelas.index', ['queries' => $query]);
     }
 

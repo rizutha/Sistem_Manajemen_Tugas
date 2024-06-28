@@ -53,7 +53,7 @@
                 <input type="file" name="file_tugas" id="file_tugas" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="submit" class="btn btn-success">Simpan Data</button>
             <a href="{{ route('tugas.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
