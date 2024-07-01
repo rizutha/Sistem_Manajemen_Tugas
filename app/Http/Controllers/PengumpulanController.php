@@ -13,11 +13,16 @@ class PengumpulanController extends Controller
 {
 
     public function index()
-    {
-        $mahasiswa = Auth::user()->mahasiswa;
-        $pengumpulans = Pengumpulan::where('id_mahasiswas', $mahasiswa->id)->with('tugas')->get();
-        return view('pengumpulan.index',  [ 'judul' => 'Daftar Tugas'], compact('pengumpulans'));
-    }
+{
+    $mahasiswa = Auth::user()->mahasiswa;
+    $pengumpulans = Pengumpulan::where('id_mahasiswas', $mahasiswa->id)
+        ->with('tugas')
+        ->get()
+        ->groupBy('tugas.id_mapel'); // Perbaiki pengelompokan berdasarkan id_mapel pada tugas
+
+    return view('pengumpulan.index', ['judul' => 'Daftar Tugas', 'pengumpulans' => $pengumpulans]);
+}
+
 
     public function edit($id)
     {

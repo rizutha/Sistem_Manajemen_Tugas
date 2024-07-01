@@ -23,7 +23,6 @@
         </div>
         @foreach ($tugasPerKelas as $kelasId => $tugass)
             <div class="kelas-table" id="kelas-{{ $kelasId }}" style="display: none;">
-            <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>

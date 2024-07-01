@@ -16,7 +16,6 @@
         @foreach ($kelasDosen as $kelas)
             <div class="kelas-table" id="kelas-{{ $kelas->id }}" style="display: none;">
                 <h3 class="mt-5">{{ $kelas->kelas }}</h3>
-                <div class="card-body">
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
