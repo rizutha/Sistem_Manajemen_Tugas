@@ -51,8 +51,10 @@ class AuthController extends Controller
 
     public function index()
     {
-        $akun = User::orderBy('id', 'asc')->paginate(10);
-        return view('akun.index', ['akun' => $akun]);
+        $akun = User::orderBy('id', 'asc')->paginate(20000);
+        return view('akun.index', [
+            'judul' => 'Data Akun',
+            'akun' => $akun]);
     }
 
     public function create()

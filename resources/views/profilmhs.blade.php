@@ -3,10 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
-
+    <div class="rounded-4 card mb-5 px-4 py-4">
+        <div class="">
         <h4>Detail Mahasiswa</h4>
-
         <div class="row">
             @if ($mahasiswa->foto)
                 <img src="{{ asset('storage/mahasiswa/' . $mahasiswa->foto) }}" style="width:250px"
@@ -26,6 +25,6 @@
                 <p class="card-text">Kelas: {{ $mahasiswa->kelas->kelas }}</p>
             </div>
         </div>
-        {{-- <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3">Kembali</a> --}}
+        <a href="javascript:history.back()" class="btn btn-secondary mt-3 d-inline-block">Kembali</a>
     </div>
 @endsection

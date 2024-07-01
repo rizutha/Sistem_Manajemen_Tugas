@@ -16,7 +16,7 @@ class PengumpulanController extends Controller
     {
         $mahasiswa = Auth::user()->mahasiswa;
         $pengumpulans = Pengumpulan::where('id_mahasiswas', $mahasiswa->id)->with('tugas')->get();
-        return view('pengumpulan.index', compact('pengumpulans'));
+        return view('pengumpulan.index',  [ 'judul' => 'Daftar Tugas'], compact('pengumpulans'));
     }
 
     public function edit($id)

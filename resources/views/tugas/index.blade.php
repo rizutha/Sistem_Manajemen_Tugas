@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
-    <div class="rounded-4 card px-5 py-4">
+    <div class="rounded-4 card px-4 py-4">
         <div class="d-flex justify-content-between">
-            <h2>Daftar Tugas</h2>
+            <h3>Daftar Tugas</h3>
             <a href="{{ route('tugas.create') }}" class="btn btn-primary mb-3">Buat Tugas Baru</a>
         </div>
 
@@ -22,10 +21,10 @@
                 @endforeach
             </select>
         </div>
-
         @foreach ($tugasPerKelas as $kelasId => $tugass)
             <div class="kelas-table" id="kelas-{{ $kelasId }}" style="display: none;">
-                <table class="table">
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
                             <th width="5px">No</th>
@@ -39,40 +38,39 @@
                     </thead>
                     <tbody>
                         @foreach ($tugass as $tugas)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $tugas->mapel->nama_matkul }}</td>
-                                <td>{{ $tugas->pertemuan }}</td>
-                                <td>{{ $tugas->tgl_buat }}</td>
-                                <td>{{ $tugas->tgl_dl }}</td>
-                                <td>
-                                    @if ($tugas->file_tugas)
-                                        <a href="{{ Storage::url('tugas/' . $tugas->file_tugas) }}" target="_blank">Lihat
-                                            File</a>
-                                    @else
-                                        Tidak ada file
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('tugas.edit', $tugas->id) }}" class="btn btn-info btn-sm">Edit</a>
-                                    <a href="{{ route('tugas.pengumpulans', $tugas->id) }}"
-                                        class="btn btn-primary btn-sm">Lihat Data Pengumpulan</a>
-                                    <form action="{{ route('tugas.destroy', $tugas->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $tugas->mapel->nama_matkul }}</td>
+                            <td>{{ $tugas->pertemuan }}</td>
+                            <td>{{ $tugas->tgl_buat }}</td>
+                            <td>{{ $tugas->tgl_dl }}</td>
+                            <td>
+                                @if ($tugas->file_tugas)
+                                    <a href="{{ Storage::url('tugas/' . $tugas->file_tugas) }}" target="_blank">Lihat
+                                        File</a>
+                                @else
+                                    Tidak ada file
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('tugas.edit', $tugas->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('tugas.pengumpulans', $tugas->id) }}"
+                                    class="btn btn-primary btn-sm">Lihat Data Pengumpulan</a>
+                                <form action="{{ route('tugas.destroy', $tugas->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
-            </div>
+            {{-- {{ $dosens->links() }} --}}
         @endforeach
     </div>
-
 
     <script>
         document.getElementById('kelas-select').addEventListener('change', function() {
@@ -88,3 +86,4 @@
         });
     </script>
 @endsection
+

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card px-5 py-4">
+    <div class="rounded-4 card px-4 py-4">
         <h4>Data Kelas</h4>
 
         <div class="form-group">
@@ -13,39 +13,37 @@
                 @endforeach
             </select>
         </div>
-
         @foreach ($kelasDosen as $kelas)
             <div class="kelas-table" id="kelas-{{ $kelas->id }}" style="display: none;">
-                <h5 class="mt-5">{{ $kelas->kelas }}</h5>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="25px">No</th>
-                            <th width="100px">NIM</th>
-                            <th width="250px">Nama Mahasiswa</th>
-                            <th width="100px">Kelas</th>
-                            <th width="100px">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($kelas->mahasiswas as $mahasiswa)
+                <h3 class="mt-5">{{ $kelas->kelas }}</h3>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $mahasiswa->nim }}</td>
-                                <td>{{ $mahasiswa->nama }}</td>
-                                <td>{{ $mahasiswa->kelas->kelas }}</td>
-                                <td>
-                                    <a href="{{ route('detailmhs', $mahasiswa->id) }}" class="btn btn-info">Detail</a>
-                                </td>
+                                <th width="25px">No</th>
+                                <th width="100px">NIM</th>
+                                <th width="250px">Nama Mahasiswa</th>
+                                <th width="100px">Kelas</th>
+                                <th width="100px">Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach ($kelas->mahasiswas as $mahasiswa)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $mahasiswa->nim }}</td>
+                                        <td>{{ $mahasiswa->nama }}</td>
+                                        <td>{{ $mahasiswa->kelas->kelas }}</td>
+                                        <td>
+                                            <a href="{{ route('detailmhs', $mahasiswa->id) }}" class="btn btn-info">Detail</a>
+                                        </td>
+                                    </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                {{-- {{ $dosens->links() }} --}}
+            @endforeach
     </div>
-
-
 
     <script>
         document.getElementById('kelas-select').addEventListener('change', function() {
@@ -61,3 +59,4 @@
         });
     </script>
 @endsection
+

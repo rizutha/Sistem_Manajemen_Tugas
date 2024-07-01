@@ -1,20 +1,24 @@
-<!-- resources/views/mapel/index.blade.php -->
 @extends('layouts.app')
-
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
-        <div class="d-flex justify-content-between">
-            <h4>Data Mata Kuliah</h4>
-
-            <div class="mb-3">
-                <a href="{{ route('mapel.create') }}" class="btn btn-primary">Tambah Matkul</a>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <div class="px-2">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">
+                        {{$judul}}
+                    </h3>
+                    <div class="mb-3">
+                        <a href="{{ route('mapel.create') }}" class="btn btn-primary">Tambah Matkul</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        @if ($mapels->isEmpty())
-            <p>Tidak ada data mapel.</p>
-        @else
-            <table class="table">
+        <div class="card-body">
+            @if ($mapels->isEmpty())
+                <p>Tidak ada data mapel.</p>
+            @else
+            <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
                         <th width="50px">No</th>
@@ -47,6 +51,10 @@
                     @endforeach
                 </tbody>
             </table>
-        @endif
+            {{ $mapels->links() }}
+            @endif
+        </div>
     </div>
+</section>
 @endsection
+

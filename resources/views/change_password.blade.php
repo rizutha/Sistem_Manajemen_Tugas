@@ -31,6 +31,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Ubah Password</button>
+            <a href="javascript:history.back()" class="btn btn-secondary ">Kembali</a>
         </form>
     </div>
 @endsection
