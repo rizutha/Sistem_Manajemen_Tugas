@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
     <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/table-datatable.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}">
@@ -27,6 +26,7 @@
             font-family: "Nunito", sans-serif;
         }
     </style>
+
 </head>
 
 <body>
@@ -256,6 +256,30 @@
                     window.location.href = '/logout';
                 }
             });
+        }
+
+        // previewFoto
+        function previewFoto() {
+            const foto = document.querySelector('input[name="foto"]');
+            const fotoPreview = document.querySelector('.foto-preview');
+            fotoPreview.style.display = 'block';
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+            fotoReader.onload = function(fotoEvent) {
+                const img = new Image();
+                img.src = fotoEvent.target.result;
+                img.onload = function() {
+                    const aspectRatio = img.width / img.height;
+                    if (aspectRatio > 1) { // Landscape
+                        fotoPreview.style.width = 'auto';
+                        fotoPreview.style.height = '100%';
+                    } else { // Portrait or square
+                        fotoPreview.style.width = '100%';
+                        fotoPreview.style.height = 'auto';
+                    }
+                    fotoPreview.src = img.src;
+                }
+            }
         }
     </script>
 
