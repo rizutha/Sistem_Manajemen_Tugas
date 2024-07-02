@@ -13,8 +13,9 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswas = Mahasiswa::with('user', 'kelas')->paginate(10); // Ubah menjadi paginate()
-        return view('mahasiswa.index', compact('mahasiswas'));
+        $mahasiswas = Mahasiswa::with('user', 'kelas')->paginate(10000); // Ubah menjadi paginate()
+        return view('mahasiswa.index', [ 'judul' => 'Data Mahasiswa'] ,compact('mahasiswas'));
+
     }
 
     public function create()

@@ -45,16 +45,17 @@
             </div>
 
             <div class="form-group">
-                <label for="file_tugas">File Tugas (Opsional)</label>
-                @if ($tugas->file_tugas)
+                <label for="file_tugas">File Tugas</label>
+                {{-- @if ($tugas->file_tugas)
                     <div>
                         <a href="{{ Storage::url('tugas/' . $tugas->file_tugas) }}" target="_blank">Lihat File Tugas</a>
                     </div>
-                @endif
+                @endif --}}
                 <input type="file" name="file_tugas" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-primary">Update Tugas</button>
+            <a href="{{ route('tugas.index') }}" class="btn btn-secondary ">Kembali</a>
         </form>
     </div>
 @endsection

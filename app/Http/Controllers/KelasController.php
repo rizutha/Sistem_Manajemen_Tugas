@@ -10,8 +10,10 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $query = Kelas::orderBy('semester', 'asc')->paginate(5);
-        return view('kelas.index', ['queries' => $query]);
+        $query = Kelas::orderBy('semester', 'asc')->paginate(50);
+        return view('kelas.index', [
+            'queries' => $query,
+            'judul' => 'Data Kelas']);
     }
 
     public function create()
