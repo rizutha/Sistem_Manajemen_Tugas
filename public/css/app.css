@@ -109,3 +109,21 @@
             transition: all .4s ease-in-out;
         }
 
+        .foto-preview-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 200px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            position: relative;
+            overflow: clip;
+        }
+
+        .foto-preview {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: none;
+        }
+
