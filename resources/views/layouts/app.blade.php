@@ -17,13 +17,6 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
-        body {
-            font-family: "Nunito", sans-serif;
-        }
-    </style>
 </head>
 
 <body>
@@ -252,6 +245,30 @@
                     window.location.href = '/logout';
                 }
             });
+        }
+
+        // previewFoto
+        function previewFoto() {
+            const foto = document.querySelector('input[name="foto"]');
+            const fotoPreview = document.querySelector('.foto-preview');
+            fotoPreview.style.display = 'block';
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+            fotoReader.onload = function(fotoEvent) {
+                const img = new Image();
+                img.src = fotoEvent.target.result;
+                img.onload = function() {
+                    const aspectRatio = img.width / img.height;
+                    if (aspectRatio > 1) { // Landscape
+                        fotoPreview.style.width = 'auto';
+                        fotoPreview.style.height = '100%';
+                    } else { // Portrait or square
+                        fotoPreview.style.width = '100%';
+                        fotoPreview.style.height = 'auto';
+                    }
+                    fotoPreview.src = img.src;
+                }
+            }
         }
     </script>
 
