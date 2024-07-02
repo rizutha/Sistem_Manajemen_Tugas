@@ -1,28 +1,33 @@
 @extends('layouts.app')
-
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
-        <div class="d-flex justify-content-between">
-            <h4>Data Kelas</h4>
-
-            <div class="mb-3">
-                <a href="{{ route('kelas.create') }}" class="btn btn-primary">Tambah Kelas</a>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <div class="px-2">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">
+                        {{$judul}}
+                    </h3>
+                    <div class="mb-3">
+                        <a href="{{ route('kelas.create') }}" class="btn btn-primary">Tambah Kelas</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <table class="table-hover table">
-            <thead>
-                <tr>
-                    <th width="50px">No</th>
-                    <th width="125px">Kelas</th>
-                    <th width="250px">Prodi</th>
-                    <th width="100px">Semester</th>
-                    <th width="300px">Wali Kelas</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($queries as $kelas)
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th width="50px">No</th>
+                        <th width="125px">Kelas</th>
+                        <th width="250px">Prodi</th>
+                        <th width="100px">Semester</th>
+                        <th width="300px">Wali Kelas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($queries as $kelas)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $kelas->kelas }}</td>
@@ -41,8 +46,10 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-        {{ $queries->links() }}
+                </tbody>
+            </table>
+            {{ $queries->links() }}
+        </div>
     </div>
+</section>
 @endsection

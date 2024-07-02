@@ -1,18 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
-        <div class="d-flex justify-content-between">
-            <h4>Data Mahasiswa</h4>
-            <div class="mb-2">
-                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-2">Tambah Mahasiswa</a>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <div class="px-2">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">
+                        {{$judul}}
+                    </h3>
+                    <div class="mb-3">
+                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah Mahasiswa</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        @if ($mahasiswas->isEmpty())
-            <p>Tidak ada data mahasiswa.</p>
-        @else
-            <table class="table">
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
                         <th width="50px">No</th>
@@ -49,6 +53,7 @@
                 </tbody>
             </table>
             {{ $mahasiswas->links() }}
-        @endif
+        </div>
     </div>
+</section>
 @endsection

@@ -20,9 +20,9 @@ class MapelController extends Controller
                     ->join('kelass', 'mapels.id_kelas', '=', 'kelass.id') // Join dengan tabel kelas
                     ->orderBy('kelass.kelas', 'asc') // Urutkan berdasarkan nama kelas
                     ->select('mapels.*') // Pilih semua kolom dari tabel mapel
-                    ->paginate(10);
+                    ->paginate(100);
 
-        return view('mapel.index', compact('mapels'));
+        return view('mapel.index',[ 'judul' => 'Data Mata Kuliah'], compact('mapels'));
     }
 
     public function create()

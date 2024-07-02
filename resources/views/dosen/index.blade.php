@@ -1,27 +1,32 @@
 @extends('layouts.app')
-
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
-        <div class="d-flex justify-content-between">
-            <h4>Data Dosen</h4>
-
-            <div class="mb-3">
-                <a href="{{ route('dosen.create') }}" class="btn btn-primary">Tambah Dosen</a>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <div class="px-2">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">
+                        {{$judul}}
+                    </h3>
+                    <div class="mb-3">
+                        <a href="{{ route('dosen.create') }}" class="btn btn-primary">Tambah Dosen</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <table class="table-hover table">
-            <thead>
-                <tr>
-                    <th width="50px">No</th>
-                    <th width="125px">NIP</th>
-                    <th width="300px">Nama</th>
-                    <th width="250px">Dosen Matkul</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dosens as $dosen => $row)
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th width="50px">No</th>
+                        <th width="125px">NIP</th>
+                        <th width="300px">Nama</th>
+                        <th width="250px">Dosen Matkul</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dosens as $dosen => $row)
                     <tr>
                         <td>{{ $dosens->firstItem() + $dosen }}</td>
                         <td>{{ $row->nip }}</td>
@@ -39,8 +44,10 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-        {{ $dosens->links() }}
+                </tbody>
+            </table>
+            {{ $dosens->links() }}
+        </div>
     </div>
+</section>
 @endsection

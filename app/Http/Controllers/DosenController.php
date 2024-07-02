@@ -17,8 +17,8 @@ class DosenController extends Controller
 {
     public function index()
     {
-        $dosens = Dosen::with('user')->paginate(10); // Menggunakan paginate
-        return view('dosen.index', compact('dosens'));
+        $dosens = Dosen::with('user')->paginate(10000); // Menggunakan paginate
+        return view('dosen.index',  [ 'judul' => 'Data Dosen'] , compact('dosens'));
     }
 
     public function create()
