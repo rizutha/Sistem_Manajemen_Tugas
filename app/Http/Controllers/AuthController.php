@@ -46,7 +46,7 @@ class AuthController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function index()
@@ -54,7 +54,8 @@ class AuthController extends Controller
         $akun = User::orderBy('id', 'asc')->paginate(20000);
         return view('akun.index', [
             'judul' => 'Data Akun',
-            'akun' => $akun]);
+            'akun' => $akun
+        ]);
     }
 
     public function create()

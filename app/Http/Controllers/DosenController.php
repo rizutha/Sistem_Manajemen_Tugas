@@ -187,48 +187,4 @@ class DosenController extends Controller
 
         return view('profildsn', compact('dosen'));
     }
-
-    // public function dashboard()
-    // {
-    //     // Ambil ID dosen yang sedang masuk
-    //     $dosenId = auth()->user()->dosen->id;
-
-    //     // Ambil kelas yang diajar oleh dosen tersebut melalui mapel
-    //     $kelasDosen = Kelas::whereHas('mapels', function ($query) use ($dosenId) {
-    //         $query->where('dosen_pengajar', $dosenId);
-    //     })->with('mahasiswas')->get();
-
-    //     // Inisialisasi array untuk menyimpan daftar mahasiswa
-    //     $daftarMahasiswa = [];
-
-    //     // Loop melalui setiap kelas yang diajar oleh dosen
-    //     foreach ($kelasDosen as $kelas) {
-    //         // Ambil daftar mahasiswa yang terdaftar di kelas tersebut
-    //         $mahasiswaKelas = Mahasiswa::where('id_kelas', $kelas->id)->get();
-
-    //         // Tambahkan daftar mahasiswa ke dalam array daftarMahasiswa
-    //         $daftarMahasiswa[$kelas->id] = $mahasiswaKelas;
-    //     }
-
-    //     return view('dosen.dashboard', compact('kelasDosen', 'daftarMahasiswa'));
-    // }
-
-    // Identifikasi pengguna saat login
-    // $user = Auth::user();
-
-    // Pastikan pengguna adalah seorang dosen
-    // if ($user->role == 'dosen') {
-    // Query data mata kuliah yang diajarkan
-    // $mataKuliahDiajarkan = Mapel::where('dosen_pengajar', $user->dosen->id)
-    //     ->with('kelas')
-    //     ->get();
-
-    // Tampilkan data di antarmuka pengguna
-    //     return view('dosen.dashboard', compact('mataKuliahDiajarkan'));
-    // } else {
-    // Redirect atau tampilkan pesan jika pengguna bukan dosen
-    //     return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
-    // }
-
-
 }
