@@ -5,7 +5,7 @@
         <nav class="navbar">
             <div class="container">
                 <a class="logo" style="text-decoration: none; font-size: 20px; color: #161616;">
-                    <img src="{{ asset('assets/atom.png') }}" alt="Logo" style="margin-right: 8px">
+                    <img src="{{ asset('assets/SMT.png') }}" alt="Logo" style="margin-right: 8px; height:32px;">
                     <strong>Sistem Manajemen Tugas</strong>
                 </a>
 
