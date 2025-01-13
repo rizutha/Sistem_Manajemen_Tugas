@@ -11,12 +11,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     <!-- Optional: Add your own CSS styles here -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-
 <body>
-    <!-- content -->
+    <!-- Content -->
     @yield('content')
 
     <!-- Bootstrap JS and Popper.js (required for Bootstrap's JavaScript plugins) -->

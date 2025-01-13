@@ -3,14 +3,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="rounded-4 card mb-5 px-5 py-4">
+    <div class="rounded-4 card mb-5 px-4 py-4">
         <div class="d-flex justify-content-between">
             <div class="container">
-                <h1>Pengumpulan Tugas: {{ $tugas->matkul }}</h1>
+                <h1>Tugas : {{ $tugas->matkul }}</h1>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>Nama Mahasiswa</th>
                             <th>Link Tugas</th>
                             <th>Tgl Pengumpulan</th>

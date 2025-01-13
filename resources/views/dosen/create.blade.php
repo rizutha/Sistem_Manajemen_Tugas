@@ -14,11 +14,12 @@
             @csrf
             <p><b>Kolom bertanda <span class="text-danger">*</span> tidak boleh
                     kosong</b></p>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col px-4">
                     <div class="row py-2">
                         <label for="users_id">Nama <span class="text-danger">*</span></label>
                         <select name="users_id" class="form-control" required>
+                            <option value="">Pilih Nama</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }} </option>
                             @endforeach
@@ -86,27 +87,24 @@
                     </div>
                 </div>
                 <div class="col px-5">
-                    <div class="row py-2">
-                        <label for="">Foto <span class="text-danger">*</span></label>
-                        <input type="file" name="foto"
-                            class="form-control @if ($errors->has('foto')) is-invalid @endif"
-                            placeholder="Pilih Foto" value="{{ old('foto') }}">
-                        <small>Tipe Foto: JPG/JPEG/PNG. Max: 10 MB.</small>
-                        @if ($errors->has('foto'))
-                            <br>
-                            <small class="text-danger">
-                                {{ $errors->first('foto') }}
-                            </small>
-                        @endif
+                    {{-- div left --}}
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <div class="foto-preview-container mb-4 mt-3">
+                            <img class="foto-preview" src="{{ asset('assets/default.png') }}">
+                        </div>
+                        <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror"
+                            onchange="previewFoto()">
+                        @error('foto')
+                            <div class="invalid-feedback alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="my-2">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-                    <a href="{{ route('dosen.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>
-                        Kembali</a>
-                </div>
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{{ route('dosen.index') }}" class="btn btn-outline-light"><i class="fa fa-arrow-left"></i>
+                    Kembali</a>
+                <button type="submit" class="btn btn-primary">Simpan Data</button>
             </div>
         </form>
     </div>

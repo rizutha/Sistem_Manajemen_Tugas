@@ -8,76 +8,12 @@ use App\Models\Mapel;
 use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class TugasController extends Controller
 {
-    // public function index()
-    // {
-    //     $tugass = Tugas::with(['kelas', 'dosen', 'mapel'])->get();
-    //     return view('tugas.index', compact('tugass'));
-    // }
-
-    // public function create()
-    // {
-    //     $dosen = Auth::user()->dosen;
-    //     $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
-    //     $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
-    //     return view('tugas.create', compact('kelas', 'mapels', 'dosen'));
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'id_mapel' => 'required|exists:mapels,id',
-    //         'semester' => 'required',
-    //         'pertemuan' => 'required',
-    //         'tgl_buat' => 'required|date',
-    //         'tgl_dl' => 'required|date',
-    //         'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
-    //     ]);
-
-    //     $mapel = Mapel::findOrFail($request->id_mapel);
-    //     $kelas = $mapel->kelas;
-
-    //     $tugas = new Tugas([
-    //         'id_dosens' => Auth::user()->dosen->id,
-    //         'id_kelas' => $kelas->id,
-    //         'id_mapel' => $mapel->id,
-    //         'matkul' => Mapel::find($request->id_mapel)->nama_matkul,
-    //         'semester' => $request->semester,
-    //         'pertemuan' => $request->pertemuan,
-    //         'tgl_buat' => $request->tgl_buat,
-    //         'tgl_dl' => $request->tgl_dl,
-    //     ]);
-
-    //     if ($request->hasFile('file_tugas')) {
-    //         $file = $request->file('file_tugas');
-    //         $filename = time() . '.' . $file->getClientOriginalExtension();
-    //         $file->storeAs('public/tugas', $filename);
-    //         $tugas->file_tugas = $filename;
-    //     }
-
-    //     $tugas->save();
-    //     $kelas = Kelas::find($tugas->id_kelas);
-    //     // Mengambil mahasiswa dari kelas
-    //     $mahasiswas = $kelas->mahasiswas;
-
-    //     // Menyimpan tugas di tabel pengumpulan untuk setiap mahasiswa
-    //     foreach ($mahasiswas as $mahasiswa) {
-    //         Pengumpulan::create([
-    //             'id_tugass' => $tugas->id,
-    //             'id_mahasiswas' => $mahasiswa->id,
-    //             'link_tugas' => null,
-    //             'tgl_pengumpulan' => null,
-    //             'nilai' => null,
-    //             'komentar' => null,
-    //         ]);
-    //     }
-
-    //     return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dibuat.');
-    // }
-
+    
     public function index()
     {
         $dosen = Auth::user()->dosen;
@@ -90,14 +26,14 @@ class TugasController extends Controller
         $dosen = Auth::user()->dosen;
         $kelas = Kelas::where('wali_kelas', $dosen->id)->get();
         $mapels = Mapel::where('dosen_pengajar', $dosen->id)->get();
-        return view('tugas.create', compact('kelas', 'mapels'));
+        return view('tugas.create', compact('kelas','mapels'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_mapel' => 'required|exists:mapels,id',
-            'pertemuan' => 'required',
+            // 'pertemuan' => 'required',
             'tgl_buat' => 'required|date',
             'tgl_dl' => 'required|date',
             'file_tugas' => 'nullable|file|mimes:pdf,doc,docx,zip',
@@ -110,12 +46,21 @@ class TugasController extends Controller
             return redirect()->back()->with('error', 'Kelas tidak ditemukan untuk mapel tersebut.');
         }
 
+        // Ambil nilai pertemuan terakhir
+        $lastPertemuan = Tugas::where('id_kelas', $kelas->id)
+                            ->where('id_mapel', $mapel->id)
+                            ->orderBy('pertemuan', 'desc')
+                            ->value('pertemuan');
+
+        // Tentukan nilai pertemuan baru
+        $newPertemuan = $lastPertemuan ? $lastPertemuan + 1 : 1;
+
         $tugas = new Tugas([
             'id_dosens' => Auth::user()->dosen->id,
             'id_kelas' => $kelas->id,
-            'id_mapel' => $mapel->id,
+            'id_mapel' => $request->id_mapel,
             'matkul' => $mapel->nama_matkul,
-            'pertemuan' => $request->pertemuan,
+            'pertemuan' => $newPertemuan,
             'tgl_buat' => $request->tgl_buat,
             'tgl_dl' => $request->tgl_dl,
         ]);
@@ -246,4 +191,10 @@ class TugasController extends Controller
         $tugas = Tugas::findOrFail($tugasId);
         return view('tugas.pengumpulans', compact('pengumpulans', 'tugas'));
     }
+    public function getKelas($id)
+    {
+        $kelas = Kelas::find($id);
+        return response()->json($kelas);
+    }
+
 }

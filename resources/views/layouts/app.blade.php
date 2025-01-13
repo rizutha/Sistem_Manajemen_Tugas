@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/table-datatable.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
@@ -23,9 +29,11 @@
             font-family: "Nunito", sans-serif;
         }
     </style>
+
 </head>
 
 <body>
+    <script src="{{ asset('mazer/assets/static/js/initTheme.js') }}"></script>
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
@@ -70,7 +78,7 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Main Menu</li>
+                        <li class="sidebar-title">Menu Utama</li>
 
                         <!-- Sidebar - Brand -->
                         <li class="sidebar-item {{ strpos(request()->url(), 'beranda') !== false ? 'active' : '' }}">
@@ -105,16 +113,16 @@
                                         <span>Data Mahasiswa</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item {{ strpos(request()->url(), 'mapel') !== false ? 'active' : '' }}">
-                                    <a href="/mapel" class='sidebar-link'>
-                                        <i class="bi bi-book"></i>
-                                        <span>Data Mapel</span>
-                                    </a>
-                                </li>
                                 <li class="sidebar-item {{ strpos(request()->url(), 'kelas') !== false ? 'active' : '' }}">
                                     <a href="/kelas" class='sidebar-link'>
                                         <i class="bi bi-door-closed"></i>
                                         <span>Data Kelas</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item {{ strpos(request()->url(), 'mapel') !== false ? 'active' : '' }}">
+                                    <a href="/mapel" class='sidebar-link'>
+                                        <i class="bi bi-book"></i>
+                                        <span>Data Mata Kuliah</span>
                                     </a>
                                 </li>
                             @break
@@ -161,15 +169,35 @@
                 </a>
             </header>
 
-            <div class="page-heading d-flex justify-content-between">
-                <h3>Selamat Datang!</h3>
+            <div class="page-heading d-flex justify-content-between align-items-center">
+                <h3 class="h3">Selamat Datang!</h3>
                 <div class="user-action d-flex align-items-center">
-                    <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="6" r="4" fill="#1C274C" />
-                        <ellipse opacity="0.5" cx="12" cy="17" rx="7" ry="4"
-                            fill="#1C274C" />
-                    </svg>
+                    @switch(auth()->user()->role)
+                        @case('admin')
+                            <div class="user-profile-container mb-4 me-2 mt-4">
+                                <img class="user-profile" src="{{ asset('assets/default.png') }}" alt="Profile Picture"
+                                    style="height: 100%">
+                            </div>
+                        @break
+
+                        @case('dosen')
+                            <div class="user-profile-container mb-4 me-2 mt-4">
+                                <img class="user-profile" src="{{ asset('storage/dosen/' . Auth::user()->dosen->foto) }}"
+                                    alt="Profile Picture" style="height: 100%">
+                            </div>
+                        @break
+
+                        @case('mahasiswa')
+                            <div class="user-profile-container mb-4 me-2 mt-4">
+                                <img class="user-profile"
+                                    src="{{ asset('storage/mahasiswa/' . Auth::user()->mahasiswa->foto) }}"
+                                    alt="Profile Picture" style="height: 100%">
+                            </div>
+                        @break
+
+                        @default
+                    @endswitch
+
                     <div class="dropdown">
                         <button class="btn dropdown-toggle rounded-3" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -213,11 +241,10 @@
                     </div>
                 </div>
             </div>
-            <div class="page-content">
-                <section class="row">
-                    <div class="col-12 col-lg-12">
-                        @yield('content')
-                    </div>
+
+            <div class="page-heading">
+                <section class="section">
+                    @yield('content')
                 </section>
             </div>
         </div>
@@ -230,6 +257,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 
 
     <!-- Need: Apexcharts -->
@@ -251,6 +280,30 @@
                     window.location.href = '/logout';
                 }
             });
+        }
+
+        // previewFoto
+        function previewFoto() {
+            const foto = document.querySelector('input[name="foto"]');
+            const fotoPreview = document.querySelector('.foto-preview');
+            fotoPreview.style.display = 'block';
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+            fotoReader.onload = function(fotoEvent) {
+                const img = new Image();
+                img.src = fotoEvent.target.result;
+                img.onload = function() {
+                    const aspectRatio = img.width / img.height;
+                    if (aspectRatio > 1) { // Landscape
+                        fotoPreview.style.width = 'auto';
+                        fotoPreview.style.height = '100%';
+                    } else { // Portrait or square
+                        fotoPreview.style.width = '100%';
+                        fotoPreview.style.height = 'auto';
+                    }
+                    fotoPreview.src = img.src;
+                }
+            }
         }
     </script>
 

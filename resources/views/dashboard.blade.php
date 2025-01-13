@@ -42,7 +42,7 @@
                         <a href="/datakelas" class="btn btn-primary btn-lg" style="width: 300px">Data Kelas</a>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <a href="/tugaskelas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Lihat Tugas</a>
+                        <a href="/tugaskelas" class="btn btn-primary btn-lg mt-2" style="width: 300px">Buat Tugas</a>
                     </div>
                 @break
 
