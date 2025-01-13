@@ -9,20 +9,15 @@ use Illuminate\Http\Request;
 
 class MapelController extends Controller
 {
-    // public function index()
-    // {
-    //     $mapels = Mapel::with(['kelas', 'dosen'])->paginate(10);
-    //     return view('mapel.index', compact('mapels'));
-    // }
     public function index()
     {
         $mapels = Mapel::with(['kelas', 'dosen'])
-                    ->join('kelass', 'mapels.id_kelas', '=', 'kelass.id') // Join dengan tabel kelas
-                    ->orderBy('kelass.kelas', 'asc') // Urutkan berdasarkan nama kelas
-                    ->select('mapels.*') // Pilih semua kolom dari tabel mapel
-                    ->paginate(100);
+            ->join('kelass', 'mapels.id_kelas', '=', 'kelass.id')
+            ->orderBy('kelass.kelas', 'asc')
+            ->select('mapels.*')
+            ->paginate(10);
 
-        return view('mapel.index',[ 'judul' => 'Data Mata Kuliah'], compact('mapels'));
+        return view('mapel.index', ['judul' => 'Data Mata Kuliah'], compact('mapels'));
     }
 
     public function create()
@@ -40,8 +35,8 @@ class MapelController extends Controller
             'nama_matkul' => 'required',
         ]);
 
-        $kelas_id = $request->input('id_kelas'); // Ambil nilai users_id dari dropdown
-        $kelas = Kelas::find($kelas_id); // Cari data user berdasarkan ID yang dipilih
+        $kelas_id = $request->input('id_kelas');
+        $kelas = Kelas::find($kelas_id);
 
         Mapel::create([
             'id_kelas' => $request->id_kelas,
@@ -49,8 +44,6 @@ class MapelController extends Controller
             'dosen_pengajar' => $request->dosen_pengajar,
             'nama_matkul' => $request->nama_matkul,
         ]);
-
-        // Mapel::create($request->all());
 
         return redirect()->route('mapel.index')
             ->with('success', 'Mapel berhasil ditambahkan.');
@@ -72,7 +65,6 @@ class MapelController extends Controller
         ]);
 
         $mapel->update($request->all());
-
         return redirect()->route('mapel.index')
             ->with('success', 'Mapel berhasil diperbarui.');
     }
@@ -81,7 +73,21 @@ class MapelController extends Controller
     {
         $mapel->delete();
 
+        notify()->success('Data berhasil dihapus!');
         return redirect()->route('mapel.index')
             ->with('success', 'Mapel berhasil dihapus.');
+    }
+
+    // Contoh penggunaan Polymorphism dan Overloading
+    public function showDetails($id)
+    {
+        $mapel = Mapel::findOrFail($id);
+        $description = $mapel->getDescription();
+        $details = $mapel->getDetails('nama_matkul', 'prodi');
+
+        return response()->json([
+            'description' => $description,
+            'details' => $details,
+        ]);
     }
 }

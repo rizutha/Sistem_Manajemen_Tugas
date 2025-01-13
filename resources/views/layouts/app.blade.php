@@ -169,8 +169,8 @@
                 </a>
             </header>
 
-            <div class="page-heading d-flex justify-content-between">
-                <h3>Selamat Datang!</h3>
+            <div class="page-heading d-flex justify-content-between align-items-center">
+                <h3 class="h3">Selamat Datang!</h3>
                 <div class="user-action d-flex align-items-center">
                     @switch(auth()->user()->role)
                         @case('admin')
