@@ -26,15 +26,15 @@ composer Install
 
 4. Salin file .env.example lalu ubah nama salinannya menjadi .env dan isi dengan konfigurasi berikut
 
-APP_NAME="Sistem Manajemen Tugas"
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE="nama_database"
-DB_USERNAME=root
-DB_PASSWORD=your_password
+    APP_NAME="Sistem Manajemen Tugas"
+    APP_URL=http://localhost
+    
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE="nama_database"
+    DB_USERNAME=root
+    DB_PASSWORD=your_password
 
 
 5. Generate Key Aplikasi Jalankan perintah berikut untuk menghasilkan kunci aplikasi:
