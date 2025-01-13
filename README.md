@@ -11,7 +11,7 @@
 
 Sistem Manajemen Tugas adalah aplikasi berbasis web untuk mengelola data tugas dalam proses pembelajaran. Dengan aplikasi ini, pengguna dapat dengan mudah mengelola data terkait kelas, jurusan, mata pelajaran, guru/dosen, murid/mahasiswa, dan tugas secara praktis dalam satu tempat.
 
-Aplikasi ini menggunakan template dari <a href="https://github.com/zuramai/mazer">Mazer - by Zuramai</a>, yang menghadirkan dashboard dengan desain UI Kit yang konsisten, rapi, dan mudah digunakan.
+Aplikasi ini dibangun menggunakan framework Laravel 10 dengan konsep MVC dan menggunakan template dari <a href="https://github.com/zuramai/mazer">Mazer - by Zuramai</a>, yang menghadirkan dashboard dengan desain UI Kit yang konsisten, rapi, dan mudah digunakan.
 
 ## Memulai Proses Instalasi
 
